@@ -1,0 +1,37 @@
+{
+  "name": "media-codecs",
+  "version": "1.0.0",
+  "description": "Get a codec parameter string (like 'avc1.4d002a') from human readable options (like { name: 'Main', level: '4.2' }) and back to a descriptive name ('AVC Main Profile Level 4.2').",
+  "keywords": [
+    "codecs",
+    "webcodecs",
+    "avc",
+    "mp4",
+    "vp",
+    "webm"
+  ],
+  "homepage": "https://github.com/dmnsgn/media-codecs",
+  "bugs": "https://github.com/dmnsgn/media-codecs/issues",
+  "repository": "dmnsgn/media-codecs",
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://paypal.me/dmnsgn"
+    },
+    {
+      "type": "individual",
+      "url": "https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3"
+    }
+  ],
+  "license": "MIT",
+  "author": "Damien Seguin (https://github.com/dmnsgn)",
+  "sideEffects": false,
+  "type": "module",
+  "exports": "./index.js",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
