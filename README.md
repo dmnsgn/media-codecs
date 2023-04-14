@@ -20,6 +20,8 @@ See the [demo](https://dmnsgn.github.io/media-codecs) that checks current browse
 [![coinbase](https://img.shields.io/badge/donate-coinbase-informational?logo=coinbase)](https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3)
 [![twitter](https://img.shields.io/twitter/follow/dmnsgn?style=social)](https://twitter.com/dmnsgn)
 
+![](https://raw.githubusercontent.com/dmnsgn/media-codecs/main/screenshot.png)
+
 ## Installation
 
 ```bash
