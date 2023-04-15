@@ -1,3 +1,5 @@
+/** @module vp */
+
 /**
  * List of codecs
  * @constant {import("../types.js").VPCodecItem[]}

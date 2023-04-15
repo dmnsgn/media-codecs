@@ -1,3 +1,5 @@
+/** @module avc */
+
 /**
  * List of profiles with their profile numbers (PP) and the constraints component (CC).
  * @constant {import("../types.js").AVCProfileItem[]}
