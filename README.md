@@ -43,50 +43,15 @@ console.log(MediaSource.isTypeSupported(mimeType));
 
 <!-- api-start -->
 
-## Constants
+## Modules
 
 <dl>
-<dt><a href="#VP_CODECS">VP_CODECS</a> : <code><a href="#VPCodecItem">Array.&lt;VPCodecItem&gt;</a></code></dt>
-<dd><p>List of codecs</p>
-</dd>
-<dt><a href="#VP_PROFILES">VP_PROFILES</a> : <code>Array.&lt;number&gt;</code></dt>
-<dd><p>List of VP profiles numbers</p>
-</dd>
-<dt><a href="#VP_LEVELS">VP_LEVELS</a> : <code>Array.&lt;number&gt;</code></dt>
-<dd><p>VP Levels</p>
-</dd>
-<dt><a href="#VP_BIT_DEPTH">VP_BIT_DEPTH</a> : <code>Array.&lt;number&gt;</code></dt>
-<dd><p>List of supported bit depth</p>
-</dd>
-<dt><a href="#AVC_PROFILES">AVC_PROFILES</a> : <code><a href="#AVCProfileItem">Array.&lt;AVCProfileItem&gt;</a></code></dt>
-<dd><p>List of profiles with their profile numbers (PP) and the constraints component (CC).</p>
-</dd>
-<dt><a href="#AVC_LEVELS">AVC_LEVELS</a> : <code>Array.&lt;number&gt;</code></dt>
-<dd><p>AVC Levels</p>
-</dd>
-</dl>
-
-## Functions
-
-<dl>
-<dt><a href="#getAllItems">getAllItems()</a> ⇒ <code><a href="#MediaCodecItem">Array.&lt;MediaCodecItem&gt;</a></code></dt>
-<dd><p>Return a list of all possible codec parameter string and their human readable names</p>
-</dd>
-<dt><a href="#getCodec">getCodec(options)</a> ⇒ <code>string</code></dt>
-<dd><p>Get a codec parameter string</p>
-</dd>
-<dt><a href="#getCodecName">getCodecName(codec)</a> ⇒ <code>string</code></dt>
-<dd><p>Get a codec human readbable name</p>
-</dd>
-<dt><a href="#getAllItems">getAllItems()</a> ⇒ <code><a href="#MediaCodecItem">Array.&lt;MediaCodecItem&gt;</a></code></dt>
-<dd><p>Return a list of all possible codec parameter string and their human readable names</p>
-</dd>
-<dt><a href="#getCodec">getCodec(options)</a> ⇒ <code>string</code></dt>
-<dd><p>Get a codec parameter string</p>
-</dd>
-<dt><a href="#getCodecName">getCodecName(codec)</a> ⇒ <code>string</code></dt>
-<dd><p>Get a codec human readbable name</p>
-</dd>
+<dt><a href="#module_index">index</a></dt>
+<dd></dd>
+<dt><a href="#module_vp">vp</a></dt>
+<dd></dd>
+<dt><a href="#module_avc">avc</a></dt>
+<dd></dd>
 </dl>
 
 ## Typedefs
@@ -104,107 +69,135 @@ console.log(MediaSource.isTypeSupported(mimeType));
 <dd></dd>
 </dl>
 
-<a name="VP_CODECS"></a>
+<a name="module_index"></a>
 
-## VP_CODECS : [<code>Array.&lt;VPCodecItem&gt;</code>](#VPCodecItem)
+## index
+
+<a name="module_vp"></a>
+
+## vp
+
+- [vp](#module_vp)
+  - [~VP_CODECS](#module_vp..VP_CODECS) : [<code>Array.&lt;VPCodecItem&gt;</code>](#VPCodecItem)
+  - [~VP_PROFILES](#module_vp..VP_PROFILES) : <code>Array.&lt;number&gt;</code>
+  - [~VP_LEVELS](#module_vp..VP_LEVELS) : <code>Array.&lt;number&gt;</code>
+  - [~VP_BIT_DEPTH](#module_vp..VP_BIT_DEPTH) : <code>Array.&lt;number&gt;</code>
+  - [~getAllItems()](#module_vp..getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+  - [~getCodec(options)](#module_vp..getCodec) ⇒ <code>string</code>
+  - [~getCodecName(codec)](#module_vp..getCodecName) ⇒ <code>string</code>
+
+<a name="module_vp..VP_CODECS"></a>
+
+### vp~VP_CODECS : [<code>Array.&lt;VPCodecItem&gt;</code>](#VPCodecItem)
 
 List of codecs
 
-**Kind**: global constant
-<a name="VP_PROFILES"></a>
+**Kind**: inner constant of [<code>vp</code>](#module_vp)
+<a name="module_vp..VP_PROFILES"></a>
 
-## VP_PROFILES : <code>Array.&lt;number&gt;</code>
+### vp~VP_PROFILES : <code>Array.&lt;number&gt;</code>
 
 List of VP profiles numbers
 
-**Kind**: global constant
-<a name="VP_LEVELS"></a>
+**Kind**: inner constant of [<code>vp</code>](#module_vp)
+<a name="module_vp..VP_LEVELS"></a>
 
-## VP_LEVELS : <code>Array.&lt;number&gt;</code>
+### vp~VP_LEVELS : <code>Array.&lt;number&gt;</code>
 
 VP Levels
 
-**Kind**: global constant
+**Kind**: inner constant of [<code>vp</code>](#module_vp)
 **See**: [webmproject.org](https://www.webmproject.org/vp9/mp4/)
-<a name="VP_BIT_DEPTH"></a>
+<a name="module_vp..VP_BIT_DEPTH"></a>
 
-## VP_BIT_DEPTH : <code>Array.&lt;number&gt;</code>
+### vp~VP_BIT_DEPTH : <code>Array.&lt;number&gt;</code>
 
 List of supported bit depth
 
-**Kind**: global constant
-<a name="AVC_PROFILES"></a>
+**Kind**: inner constant of [<code>vp</code>](#module_vp)
+<a name="module_vp..getAllItems"></a>
 
-## AVC_PROFILES : [<code>Array.&lt;AVCProfileItem&gt;</code>](#AVCProfileItem)
-
-List of profiles with their profile numbers (PP) and the constraints component (CC).
-
-**Kind**: global constant
-<a name="AVC_LEVELS"></a>
-
-## AVC_LEVELS : <code>Array.&lt;number&gt;</code>
-
-AVC Levels
-
-**Kind**: global constant
-**See**: [wikipedia.org](https://en.wikipedia.org/wiki/Advanced_Video_Coding#Levels)
-<a name="getAllItems"></a>
-
-## getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+### vp~getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
 
 Return a list of all possible codec parameter string and their human readable names
 
-**Kind**: global function
-<a name="getCodec"></a>
+**Kind**: inner method of [<code>vp</code>](#module_vp)
+<a name="module_vp..getCodec"></a>
 
-## getCodec(options) ⇒ <code>string</code>
+### vp~getCodec(options) ⇒ <code>string</code>
 
 Get a codec parameter string
 
-**Kind**: global function
+**Kind**: inner method of [<code>vp</code>](#module_vp)
 
 | Param   | Type                                           |
 | ------- | ---------------------------------------------- |
 | options | [<code>VPCodecOptions</code>](#VPCodecOptions) |
 
-<a name="getCodecName"></a>
+<a name="module_vp..getCodecName"></a>
 
-## getCodecName(codec) ⇒ <code>string</code>
+### vp~getCodecName(codec) ⇒ <code>string</code>
 
 Get a codec human readbable name
 
-**Kind**: global function
+**Kind**: inner method of [<code>vp</code>](#module_vp)
 
 | Param | Type                | Description                                      |
 | ----- | ------------------- | ------------------------------------------------ |
 | codec | <code>string</code> | a codec string (avc1[.PPCCLL] eg. "avc1.640028") |
 
-<a name="getAllItems"></a>
+<a name="module_avc"></a>
 
-## getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+## avc
+
+- [avc](#module_avc)
+  - [~AVC_PROFILES](#module_avc..AVC_PROFILES) : [<code>Array.&lt;AVCProfileItem&gt;</code>](#AVCProfileItem)
+  - [~AVC_LEVELS](#module_avc..AVC_LEVELS) : <code>Array.&lt;number&gt;</code>
+  - [~getAllItems()](#module_avc..getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+  - [~getCodec(options)](#module_avc..getCodec) ⇒ <code>string</code>
+  - [~getCodecName(codec)](#module_avc..getCodecName) ⇒ <code>string</code>
+
+<a name="module_avc..AVC_PROFILES"></a>
+
+### avc~AVC_PROFILES : [<code>Array.&lt;AVCProfileItem&gt;</code>](#AVCProfileItem)
+
+List of profiles with their profile numbers (PP) and the constraints component (CC).
+
+**Kind**: inner constant of [<code>avc</code>](#module_avc)
+<a name="module_avc..AVC_LEVELS"></a>
+
+### avc~AVC_LEVELS : <code>Array.&lt;number&gt;</code>
+
+AVC Levels
+
+**Kind**: inner constant of [<code>avc</code>](#module_avc)
+**See**: [wikipedia.org](https://en.wikipedia.org/wiki/Advanced_Video_Coding#Levels)
+<a name="module_avc..getAllItems"></a>
+
+### avc~getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
 
 Return a list of all possible codec parameter string and their human readable names
 
-**Kind**: global function
-<a name="getCodec"></a>
+**Kind**: inner method of [<code>avc</code>](#module_avc)
+<a name="module_avc..getCodec"></a>
 
-## getCodec(options) ⇒ <code>string</code>
+### avc~getCodec(options) ⇒ <code>string</code>
 
 Get a codec parameter string
 
-**Kind**: global function
+**Kind**: inner method of [<code>avc</code>](#module_avc)
 
 | Param   | Type                                             |
 | ------- | ------------------------------------------------ |
 | options | [<code>AVCCodecOptions</code>](#AVCCodecOptions) |
 
-<a name="getCodecName"></a>
+<a name="module_avc..getCodecName"></a>
 
-## getCodecName(codec) ⇒ <code>string</code>
+### avc~getCodecName(codec) ⇒ <code>string</code>
 
 Get a codec human readbable name
 
-**Kind**: global function
+**Kind**: inner method of [<code>avc</code>](#module_avc)
 
 | Param | Type                | Description                                        |
 | ----- | ------------------- | -------------------------------------------------- |
