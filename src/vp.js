@@ -2,7 +2,7 @@
 
 /**
  * List of codecs
- * @constant {import("../types.js").VPCodecItem[]}
+ * @constant {import("../types.js").CodecItem[]}
  */
 const VP_CODECS = [
   { name: "VP8", cccc: "vp08" },
@@ -21,7 +21,14 @@ const VP_PROFILES = [0, 1, 2, 3];
  * @see [webmproject.org]{@link https://www.webmproject.org/vp9/mp4/}
  */
 // prettier-ignore
-const VP_LEVELS = ["1", "1.1", "2", "2.1", "3", "3.1", "4", "4.1", "5", "5.1", "5.2", "6", "6.1", "6.2"];
+const VP_LEVELS = [
+  "1", "1.1",
+  "2", "2.1",
+  "3", "3.1",
+  "4", "4.1",
+  "5", "5.1", "5.2",
+  "6", "6.1", "6.2"
+];
 
 /**
  * List of supported bit depth
@@ -68,15 +75,18 @@ const getAllItems = () =>
  * @returns {string}
  */
 const getCodec = ({ name, profile, level, bitDepth }) => {
-  if (!VP_LEVELS.includes(level))
-    throw new Error(`Unknown VP Level "${level}"`);
-  if (!VP_PROFILES.includes(profile))
-    throw new Error(`Unknown VP Profile "${profile}"`);
-  if (!VP_BIT_DEPTH.includes(bitDepth))
-    throw new Error(`Unknown VP BitDepth "${bitDepth}"`);
-
   const codec = VP_CODECS.find((codec) => codec.name === name);
   if (!codec) throw new Error(`Unknown VP Codec "${name}"`);
+
+  if (!VP_PROFILES.includes(profile)) {
+    throw new Error(`Unknown VP Profile "${profile}"`);
+  }
+  if (!VP_LEVELS.includes(level)) {
+    throw new Error(`Unknown VP Level "${level}"`);
+  }
+  if (!VP_BIT_DEPTH.includes(bitDepth)) {
+    throw new Error(`Unknown VP BitDepth "${bitDepth}"`);
+  }
 
   return formatCodec(
     codec.cccc,

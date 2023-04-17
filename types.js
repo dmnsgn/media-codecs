@@ -6,7 +6,7 @@
  */
 
 /**
- * @typedef {Object} VPCodecItem
+ * @typedef {Object} CodecItem
  * @property {string} name
  * @property {string} cccc the four-character ID for the codec
  */

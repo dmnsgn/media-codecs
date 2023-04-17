@@ -51,34 +51,54 @@
     <script src="web_modules/import-map.json" type="importmap-shim"></script>
 
     <script type="module">
-      import * as mediaCodecs from "./index.js";
+      import * as MediaCodecs from "./index.js";
 
       const tbody = document.querySelector("table tbody");
       const video = document.createElement("video");
 
       let body = "";
 
-      Object.keys(mediaCodecs).forEach((container) => {
+      window.MediaCodecs = MediaCodecs;
+
+      for (const container of Object.keys(MediaCodecs)) {
+        const items = MediaCodecs[container].getAllItems();
         body += `<tr>
-          <th>Container (${container})</th>
+          <th>${container} Container (${items.length} codecs)</th>
           <th>Codec<br>video/mp4</th>
           <th>HTMLMediaElement.<br>canPlayType</th>
           <th>MediaSource.<br>isTypeSupported</th>
+          <th>VideoEncoder.<br>isConfigSupported</th>
         </tr>`;
 
-        mediaCodecs[container].getAllItems().forEach(({ name, codec }) => {
+        for (const { name, codec } of items) {
           const mimeType = `video/mp4;codecs="${codec}"`;
+
+          let videoEncoderSupport;
+
+          if ("VideoEncoder" in window) {
+            try {
+              ({ supported: videoEncoderSupport } =
+                await VideoEncoder.isConfigSupported({
+                  codec,
+                  width: 128,
+                  height: 128,
+                }));
+            } catch (error) {
+              console.debug(codec, error);
+            }
+          }
 
           body += `<tr>${[
             name,
             codec,
             video.canPlayType(mimeType) || "❌",
             MediaSource.isTypeSupported(mimeType) ? "✅" : "❌",
+            videoEncoderSupport ? "✅" : "❌",
           ]
             .map((d) => `<td>${d}</td>`)
             .join("")}</tr>`;
-        });
-      });
+        }
+      }
 
       tbody.innerHTML = body;
     </script>

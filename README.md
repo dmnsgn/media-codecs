@@ -12,9 +12,9 @@
 
 Get a codec parameter string (like `"avc1.4d002a"`) from human readable options (like `{ name: "Main", level: "4.2" }`) and back to a descriptive name ("AVC Main Profile Level 4.2").
 
-Useful for checking supported codecs with `HTMLMediaElement.canPlayType` / `MediaSource.isTypeSupported` and to pass as option for the [WebCodecs API](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API) VideoEncoder [configure parameters](https://developer.mozilla.org/en-US/docs/Web/API/VideoEncoder/configure#parameters). Supports Advanced Video Coding (AVC) and Video Partition (VP).
+Useful for checking supported codecs with `HTMLMediaElement.canPlayType` / `MediaSource.isTypeSupported` and to pass as option for the [WebCodecs API](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API) VideoEncoder [configure parameters](https://developer.mozilla.org/en-US/docs/Web/API/VideoEncoder/configure#parameters). Supports Advanced Video Coding ([AVC](https://en.wikipedia.org/wiki/Advanced_Video_Coding)), Video Partition ([VP8/VP9](<(https://www.webmproject.org/vp9/)>)) and AOMedia Video ([AV1](https://en.wikipedia.org/wiki/AV1)).
 
-See the [demo](https://dmnsgn.github.io/media-codecs) that checks current browser support of all codecs.
+See the [demo](https://dmnsgn.github.io/media-codecs) that checks current browser support of all codecs and MDN's [Codecs in common media types](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/codecs_parameter).
 
 [![paypal](https://img.shields.io/badge/donate-paypal-informational?logo=paypal)](https://paypal.me/dmnsgn)
 [![coinbase](https://img.shields.io/badge/donate-coinbase-informational?logo=coinbase)](https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3)
@@ -34,10 +34,16 @@ npm install media-codecs
 import { AVC } from "media-codecs";
 
 const codec = AVC.getCodec({ name: "Main", level: "4.2" });
+// => avc1.4d002a
 const mimeType = `video/mp4;codecs="${codec}"`;
 
 console.log(MediaSource.isTypeSupported(mimeType));
 ```
+
+Roadmap:
+
+- [ ] [HEVC](https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding)
+- [ ] VP and AV1 optional parameters
 
 ## API
 

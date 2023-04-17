@@ -39,7 +39,14 @@ const cccc = "avc1";
  * @see [wikipedia.org]{@link https://en.wikipedia.org/wiki/Advanced_Video_Coding#Levels}
  */
 // prettier-ignore
-const AVC_LEVELS = ["1", "1.1", "1.2", "1.3", "2", "2.1", "2.2", "3", "3.1", "3.2", "4", "4.1", "4.2", "5", "5.1", "5.2", "6", "6.1", "6.2"];
+const AVC_LEVELS = [
+  "1", "1.1", "1.2", "1.3",
+  "2", "2.1", "2.2",
+  "3", "3.1", "3.2",
+  "4", "4.1", "4.2",
+  "5", "5.1", "5.2",
+  "6", "6.1", "6.2"
+];
 
 /** @private */
 const formatLevel = (level) =>
