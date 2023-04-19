@@ -1,6 +1,6 @@
 {
   "name": "media-codecs",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Get a codec parameter string (like 'avc1.4d002a') from human readable options (like { name: 'Main', level: '4.2' }) and back to a descriptive name ('AVC Main Profile Level 4.2').",
   "keywords": [
     "codecs",
@@ -30,12 +30,12 @@
   "exports": "./index.js",
   "main": "index.js",
   "types": "types/index.d.ts",
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
-  },
   "devDependencies": {
     "es-module-shims": "^1.7.1",
     "list.js": "^2.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }
