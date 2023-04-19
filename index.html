@@ -23,13 +23,24 @@
       main {
         padding: 0 20px;
       }
-
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      nav ul {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        gap: 10px;
+      }
       th {
         position: sticky;
         top: 0;
         z-index: 10;
         color: var(--color-light);
         background-color: var(--color-dark);
+        font-size: 10px;
       }
       tr:nth-child(2n + 1) {
         background-color: #e1e1e1;
@@ -43,32 +54,50 @@
   <body>
     <main>
       <h1>media-codecs</h1>
+      <nav>
+        Filter:
+        <ul>
+          <a href="#">Clear</a>
+        </ul>
+        <div>
+          <input
+            type="text"
+            class="fuzzy-search"
+            placeholder="Search by name"
+          />
+        </div>
+      </nav>
       <table>
-        <tbody></tbody>
+        <tbody class="list">
+          <tr>
+            <td>Loading...</td>
+          </tr>
+        </tbody>
       </table>
     </main>
     <script async src="web_modules/es-module-shims.js" type="module"></script>
     <script src="web_modules/import-map.json" type="importmap-shim"></script>
 
-    <script type="module">
+    <script type="module-shim">
       import * as MediaCodecs from "./index.js";
+      import List from "list.js";
 
-      const tbody = document.querySelector("table tbody");
-      const video = document.createElement("video");
+      const mainElement = document.querySelector("main");
+      const navListElement = document.querySelector("nav ul");
+      const tbodyElement = document.querySelector("table tbody");
+      const videoElement = document.createElement("video");
 
-      let body = "";
+      let nav = "";
+      let table = "";
 
       window.MediaCodecs = MediaCodecs;
 
-      for (const container of Object.keys(MediaCodecs)) {
+      const containers = Object.keys(MediaCodecs);
+
+      for (const container of containers) {
         const items = MediaCodecs[container].getAllItems();
-        body += `<tr>
-          <th>${container} Container (${items.length} codecs)</th>
-          <th>Codec<br>video/mp4</th>
-          <th>HTMLMediaElement.<br>canPlayType</th>
-          <th>MediaSource.<br>isTypeSupported</th>
-          <th>VideoEncoder.<br>isConfigSupported</th>
-        </tr>`;
+
+        const checks = [];
 
         for (const { name, codec } of items) {
           const mimeType = `video/mp4;codecs="${codec}"`;
@@ -88,19 +117,67 @@
             }
           }
 
-          body += `<tr>${[
+          checks.push([
             name,
             codec,
-            video.canPlayType(mimeType) || "❌",
-            MediaSource.isTypeSupported(mimeType) ? "✅" : "❌",
-            videoEncoderSupport ? "✅" : "❌",
-          ]
-            .map((d) => `<td>${d}</td>`)
-            .join("")}</tr>`;
+            videoElement.canPlayType(mimeType),
+            MediaSource.isTypeSupported(mimeType),
+            videoEncoderSupport,
+          ]);
         }
+
+        nav += `<li><a href="#${container}">${container}</a></li>`;
+        table += `<tr class="${container}">
+          <th>${container} Container (${items.length} codecs)</th>
+          <th>Codec string<br>video/mp4</th>
+          <th>HTMLMediaElement.<br>canPlayType<br>(${
+            checks.map((check) => !!check[2]).filter(Boolean).length
+          })</th>
+          <th>MediaSource.<br>isTypeSupported<br>(${
+            checks.map((check) => !!check[3]).filter(Boolean).length
+          })</th>
+          <th>VideoEncoder.<br>isConfigSupported<br>(${
+            checks.map((check) => !!check[4]).filter(Boolean).length
+          })</th>
+        </tr>
+        ${checks
+          .map(
+            ([name, codec, canPlay, mediaSource, videoEncoder]) =>
+              `<tr class="${container}">${[
+                ["name", name],
+                ["codec", codec],
+                ["canPlay", canPlay || "❌"],
+                ["mediaSource", mediaSource ? "✅" : "❌"],
+                ["videoEncoder", videoEncoder ? "✅" : "❌"],
+              ]
+                .map(([c, d]) => `<td class=${c}>${d}</td>`)
+                .join("")}</tr>`
+          )
+          .join("")}`;
       }
 
-      tbody.innerHTML = body;
+      navListElement.insertAdjacentHTML("beforeend", nav);
+      tbodyElement.innerHTML = table;
+
+      const list = new List(mainElement, {
+        valueNames: ["name", "codec", "canPlay", "mediaSource", "videoEncoder"],
+        page: 100000,
+        fuzzySearch: { threshold: 0.3 },
+      });
+
+      const filter = () => {
+        const hash = location.hash.substring(1);
+        if (containers.includes(hash)) {
+          list.filter((item) => item.elm.className === hash);
+        } else {
+          list.filter();
+        }
+      };
+
+      addEventListener("hashchange", () => {
+        filter();
+      });
+      filter();
     </script>
   </body>
 </html>

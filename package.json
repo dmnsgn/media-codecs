@@ -33,5 +33,9 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "es-module-shims": "^1.7.1",
+    "list.js": "^2.3.1"
   }
 }
