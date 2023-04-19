@@ -85,7 +85,7 @@ const getAllItems = () =>
             if (profile.P !== "2" && bitDepth === 12) return;
 
             return {
-              name: `${codec.name} Profile ${profile.name} Level ${level} Tier ${tier} BitDepth ${bitDepth}`,
+              name: `${codec.name} ${profile.name} Profile Level ${level} Tier ${tier} BitDepth ${bitDepth}`,
               codec: formatCodec(
                 codec.cccc,
                 formatProfile(profile),

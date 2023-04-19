@@ -2,7 +2,7 @@
 
 /**
  * List of profiles with their profile numbers (PP) and the constraints component (CC).
- * @constant {import("../types.js").AVCProfileItem[]}
+ * @constant {import("../types.js").VCProfileItem[]}
  */
 const AVC_PROFILES = [
   { name: "Constrained Baseline", PP: "42", CC: "40" },
@@ -53,7 +53,7 @@ const formatLevel = (level) =>
   (parseFloat(level) * 10).toString(16).padStart(2, "0");
 
 /** @private */
-const formatCodec = ({ PP, CC }, LL) => `${cccc}.${PP}${CC}${LL}`;
+const formatCodec = (cccc, { PP, CC }, LL) => `${cccc}.${PP}${CC}${LL}`;
 
 /**
  * Return a list of all possible codec parameter string and their human readable names
@@ -63,7 +63,7 @@ const getAllItems = () =>
   AVC_PROFILES.map((profile) =>
     AVC_LEVELS.map((level) => ({
       name: `AVC ${profile.name} Profile Level ${level}`,
-      codec: formatCodec(profile, formatLevel(level)),
+      codec: formatCodec(cccc, profile, formatLevel(level)),
     }))
   ).flat();
 
@@ -72,14 +72,14 @@ const getAllItems = () =>
  * @param {import("../types.js").AVCCodecOptions} options
  * @returns {string}
  */
-const getCodec = ({ name, level }) => {
+const getCodec = ({ profile: profileName, level }) => {
   if (!AVC_LEVELS.includes(level))
     throw new Error(`Unknown AVC Level "${level}"`);
 
-  const profile = AVC_PROFILES.find((profile) => profile.name === name);
-  if (!profile) throw new Error(`Unknown AVC Name "${name}"`);
+  const profile = AVC_PROFILES.find((profile) => profile.name === profileName);
+  if (!profile) throw new Error(`Unknown AVC Profile "${profileName}"`);
 
-  return formatCodec(profile, formatLevel(level));
+  return formatCodec(cccc, profile, formatLevel(level));
 };
 
 /**
@@ -88,7 +88,7 @@ const getCodec = ({ name, level }) => {
  * @returns {string}
  */
 const getCodecName = (codec) =>
-  getAllItems().find((profile) => profile.codec === codec)?.name;
+  getAllItems().find((item) => item.codec === codec)?.name;
 
 export {
   AVC_PROFILES,

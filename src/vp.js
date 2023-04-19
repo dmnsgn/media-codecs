@@ -7,6 +7,7 @@
 const VP_CODECS = [
   { name: "VP8", cccc: "vp08" },
   { name: "VP9", cccc: "vp09" },
+  // { name: "VP10", cccc: "vp10" },
 ];
 
 /**
