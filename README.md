@@ -33,7 +33,7 @@ npm install media-codecs
 ```js
 import { AVC } from "media-codecs";
 
-const codec = AVC.getCodec({ name: "Main", level: "4.2" });
+const codec = AVC.getCodec({ profile: "Main", level: "4.2" });
 // => avc1.4d002a
 const mimeType = `video/mp4;codecs="${codec}"`;
 
