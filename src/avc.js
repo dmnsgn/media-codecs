@@ -2,7 +2,8 @@
 
 /**
  * List of profiles with their profile numbers (PP) and the constraints component (CC).
- * @constant {import("../types.js").VCProfileItem[]}
+ * @constant
+ * @type {import("../types.js").VCProfileItem[]}
  */
 const AVC_PROFILES = [
   { name: "Constrained Baseline", PP: "42", CC: "40" },
@@ -35,7 +36,8 @@ const cccc = "avc1";
 
 /**
  * AVC Levels
- * @constant {number[]}
+ * @constant
+ * @type {number[]}
  * @see [wikipedia.org]{@link https://en.wikipedia.org/wiki/Advanced_Video_Coding#Levels}
  */
 // prettier-ignore
@@ -64,7 +66,7 @@ const getAllItems = () =>
     AVC_LEVELS.map((level) => ({
       name: `AVC ${profile.name} Profile Level ${level}`,
       codec: formatCodec(cccc, profile, formatLevel(level)),
-    }))
+    })),
   ).flat();
 
 /**

@@ -2,8 +2,10 @@
 
 /**
  * List of profiles with their profile numbers (PP) and the compatibility (C).
- * @constant {import("../types.js").VCProfileItem[]}
+ *
  * See Annexe 3 Profiles
+ * @constant
+ * @type {import("../types.js").VCProfileItem[]}
  */
 const HEVC_PROFILES = [
   { name: "Main", PP: "1" },
@@ -28,13 +30,15 @@ const cccc = "hev1"; // TODO: is "hvc1" necessary
 /**
  * HEVC Profile Compatibility as a number in the 0..32 range
  * TODO: is that correct
- * @constant {number[]}
+ * @constant
+ * @type {number[]}
  */
 const HEVC_PROFILE_COMPATIBILITY = Array.from({ length: 32 }, (_, i) => i);
 
 /**
  * HEVC Levels
- * @constant {number[]}
+ * @constant
+ * @type {string[]}
  * @see [hevc-levels]{@link https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Tiers_and_levels}
  */
 // prettier-ignore
@@ -49,7 +53,8 @@ const HEVC_LEVELS = [
 
 /**
  * List of supported tier
- * @constant {number[]}
+ * @constant
+ * @type {string[]}
  */
 const HEVC_TIER = ["Main", "High"];
 
@@ -95,12 +100,12 @@ const getAllItems = () =>
               formatCompatibility(compatibility),
               formatTier(tier),
               formatLevel(level),
-              "b0" // TODO
+              "b0", // TODO
             ),
           };
-        })
-      )
-    )
+        }),
+      ),
+    ),
   )
     .flat(3)
     .filter(Boolean);
@@ -133,7 +138,7 @@ const getCodec = ({
     formatCompatibility(compatibility),
     formatLevel(level),
     formatTier(tier),
-    constraint
+    constraint,
   );
 };
 
@@ -147,7 +152,9 @@ const getCodecName = (codec) =>
 
 export {
   HEVC_PROFILES,
+  HEVC_PROFILE_COMPATIBILITY,
   HEVC_LEVELS,
+  HEVC_TIER,
   formatCodec,
   formatLevel,
   getAllItems,

@@ -2,7 +2,8 @@
 
 /**
  * List of codecs
- * @constant {import("../types.js").CodecItem[]}
+ * @constant
+ * @type {import("../types.js").CodecItem[]}
  */
 const AV_CODECS = [
   { name: "AV1", cccc: "av01" },
@@ -11,7 +12,8 @@ const AV_CODECS = [
 
 /**
  * List of AV profiles numbers
- * @constant {number[]}
+ * @constant
+ * @type {import("../types.js").AVProfileItem[]}
  * @see [av1-spec]{@link https://aomediacodec.github.io/av1-spec/#profiles}
  */
 const AV_PROFILES = [
@@ -22,7 +24,8 @@ const AV_PROFILES = [
 
 /**
  * AV Levels
- * @constant {number[]}
+ * @constant
+ * @type {string[]}
  * @see [av1-spec]{@link https://aomediacodec.github.io/av1-spec/#levels}
  */
 // prettier-ignore
@@ -37,13 +40,15 @@ const AV_LEVELS = [
 
 /**
  * List of supported tier
- * @constant {number[]}
+ * @constant
+ * @type {string[]}
  */
 const AV_TIER = ["Main", "High"];
 
 /**
  * List of supported bit depth
- * @constant {number[]}
+ * @constant
+ * @type {number[]}
  */
 const AV_BIT_DEPTH = [8, 10, 12];
 
@@ -91,13 +96,13 @@ const getAllItems = () =>
                 formatProfile(profile),
                 formatLevel(level),
                 formatTier(tier),
-                formatBitDepth(bitDepth)
+                formatBitDepth(bitDepth),
               ),
             };
           });
-        })
-      )
-    )
+        }),
+      ),
+    ),
   )
     .flat(4)
     .filter(Boolean);
@@ -130,7 +135,7 @@ const getCodec = ({ name, profile: profileName, level, tier, bitDepth }) => {
     formatProfile(profile),
     formatLevel(level),
     formatTier(tier),
-    formatBitDepth(bitDepth)
+    formatBitDepth(bitDepth),
   );
 };
 
@@ -146,6 +151,7 @@ export {
   AV_CODECS,
   AV_PROFILES,
   AV_LEVELS,
+  AV_TIER,
   AV_BIT_DEPTH,
   formatCodec,
   formatLevel,

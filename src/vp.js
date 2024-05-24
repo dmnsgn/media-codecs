@@ -2,7 +2,8 @@
 
 /**
  * List of codecs
- * @constant {import("../types.js").CodecItem[]}
+ * @constant
+ * @type {import("../types.js").CodecItem[]}
  */
 const VP_CODECS = [
   { name: "VP8", cccc: "vp08" },
@@ -18,7 +19,8 @@ const VP_PROFILES = [0, 1, 2, 3];
 
 /**
  * VP Levels
- * @constant {number[]}
+ * @constant
+ * @type {string[]}
  * @see [webmproject.org]{@link https://www.webmproject.org/vp9/mp4/}
  */
 // prettier-ignore
@@ -33,7 +35,8 @@ const VP_LEVELS = [
 
 /**
  * List of supported bit depth
- * @constant {number[]}
+ * @constant
+ * @type {number[]}
  */
 const VP_BIT_DEPTH = [8, 10, 12];
 
@@ -63,11 +66,11 @@ const getAllItems = () =>
             codec.cccc,
             formatProfile(profile),
             formatLevel(level),
-            formatBitDepth(bitDepth)
+            formatBitDepth(bitDepth),
           ),
-        }))
-      )
-    )
+        })),
+      ),
+    ),
   ).flat(4);
 
 /**
@@ -93,7 +96,7 @@ const getCodec = ({ name, profile, level, bitDepth }) => {
     codec.cccc,
     formatProfile(profile),
     formatLevel(level),
-    formatBitDepth(bitDepth)
+    formatBitDepth(bitDepth),
   );
 };
 
