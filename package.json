@@ -1,6 +1,6 @@
 {
   "name": "media-codecs",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Get a codec parameter string (like 'avc1.4d002a') from human readable options (like { name: 'Main', level: '4.2' }) and back to a descriptive name ('AVC Main Profile Level 4.2').",
   "keywords": [
     "codecs",

@@ -52,330 +52,372 @@ Roadmap:
 ## Modules
 
 <dl>
-<dt><a href="#module_index">index</a></dt>
+<dt><a href="#module_media-codecs">media-codecs</a></dt>
 <dd></dd>
-<dt><a href="#module_vp">vp</a></dt>
-<dd></dd>
-<dt><a href="#module_hevc">hevc</a></dt>
+<dt><a href="#module_av">av</a></dt>
 <dd></dd>
 <dt><a href="#module_avc">avc</a></dt>
 <dd></dd>
-<dt><a href="#module_av">av</a></dt>
+<dt><a href="#module_hevc">hevc</a></dt>
+<dd></dd>
+<dt><a href="#module_vp">vp</a></dt>
 <dd></dd>
 </dl>
 
 ## Typedefs
 
 <dl>
-<dt><a href="#VCProfileItem">VCProfileItem</a> : <code>Object</code></dt>
+<dt><a href="#AVProfileItem">AVProfileItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#CodecItem">CodecItem</a> : <code>Object</code></dt>
+<dt><a href="#VCProfileItem">VCProfileItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#MediaCodecItem">MediaCodecItem</a> : <code>Object</code></dt>
+<dt><a href="#CodecItem">CodecItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#VPCodecOptions">VPCodecOptions</a> : <code>Object</code></dt>
+<dt><a href="#MediaCodecItem">MediaCodecItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AVCodecOptions">AVCodecOptions</a> : <code>Object</code></dt>
+<dt><a href="#VPCodecOptions">VPCodecOptions</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#AVCCodecOptions">AVCCodecOptions</a> : <code>Object</code></dt>
+<dt><a href="#AVCodecOptions">AVCodecOptions</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#HEVCCodecOptions">HEVCCodecOptions</a> : <code>Object</code></dt>
+<dt><a href="#AVCCodecOptions">AVCCodecOptions</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#HEVCCodecOptions">HEVCCodecOptions</a> : <code>object</code></dt>
 <dd></dd>
 </dl>
 
-<a name="module_index"></a>
+<a name="module_media-codecs"></a>
 
-## index
+## media-codecs
 
-<a name="module_vp"></a>
+- [media-codecs](#module_media-codecs)
+  - [.VP](#module_media-codecs.VP) : [<code>vp</code>](#module_vp)
+  - [.AV](#module_media-codecs.AV) : [<code>av</code>](#module_av)
+  - [.AVC](#module_media-codecs.AVC) : [<code>avc</code>](#module_avc)
+  - [.HEVC](#module_media-codecs.HEVC) : [<code>hevc</code>](#module_hevc)
 
-## vp
+<a name="module_media-codecs.VP"></a>
 
-- [vp](#module_vp)
-  - [~VP_CODECS](#module_vp..VP_CODECS) : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
-  - [~VP_PROFILES](#module_vp..VP_PROFILES) : <code>Array.&lt;number&gt;</code>
-  - [~VP_LEVELS](#module_vp..VP_LEVELS) : <code>Array.&lt;number&gt;</code>
-  - [~VP_BIT_DEPTH](#module_vp..VP_BIT_DEPTH) : <code>Array.&lt;number&gt;</code>
-  - [~getAllItems()](#module_vp..getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
-  - [~getCodec(options)](#module_vp..getCodec) ⇒ <code>string</code>
-  - [~getCodecName(codec)](#module_vp..getCodecName) ⇒ <code>string</code>
+### media-codecs.VP : [<code>vp</code>](#module_vp)
 
-<a name="module_vp..VP_CODECS"></a>
+**Kind**: static property of [<code>media-codecs</code>](#module_media-codecs)
+<a name="module_media-codecs.AV"></a>
 
-### vp~VP_CODECS : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
+### media-codecs.AV : [<code>av</code>](#module_av)
+
+**Kind**: static property of [<code>media-codecs</code>](#module_media-codecs)
+<a name="module_media-codecs.AVC"></a>
+
+### media-codecs.AVC : [<code>avc</code>](#module_avc)
+
+**Kind**: static property of [<code>media-codecs</code>](#module_media-codecs)
+<a name="module_media-codecs.HEVC"></a>
+
+### media-codecs.HEVC : [<code>hevc</code>](#module_hevc)
+
+**Kind**: static property of [<code>media-codecs</code>](#module_media-codecs)
+<a name="module_av"></a>
+
+## av
+
+- [av](#module_av)
+  - [.AV_CODECS](#module_av.AV_CODECS) : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
+  - [.AV_PROFILES](#module_av.AV_PROFILES) : [<code>Array.&lt;AVProfileItem&gt;</code>](#AVProfileItem)
+  - [.AV_LEVELS](#module_av.AV_LEVELS) : <code>Array.&lt;string&gt;</code>
+  - [.AV_TIER](#module_av.AV_TIER) : <code>Array.&lt;string&gt;</code>
+  - [.AV_BIT_DEPTH](#module_av.AV_BIT_DEPTH) : <code>Array.&lt;number&gt;</code>
+  - [.getAllItems()](#module_av.getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+  - [.getCodec(options)](#module_av.getCodec) ⇒ <code>string</code>
+  - [.getCodecName(codec)](#module_av.getCodecName) ⇒ <code>string</code>
+
+<a name="module_av.AV_CODECS"></a>
+
+### av.AV_CODECS : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
 
 List of codecs
 
-**Kind**: inner constant of [<code>vp</code>](#module_vp)
-<a name="module_vp..VP_PROFILES"></a>
+**Kind**: static constant of [<code>av</code>](#module_av)
+<a name="module_av.AV_PROFILES"></a>
 
-### vp~VP_PROFILES : <code>Array.&lt;number&gt;</code>
+### av.AV_PROFILES : [<code>Array.&lt;AVProfileItem&gt;</code>](#AVProfileItem)
 
-List of VP profiles numbers
+List of AV profiles numbers
 
-**Kind**: inner constant of [<code>vp</code>](#module_vp)
-<a name="module_vp..VP_LEVELS"></a>
+**Kind**: static constant of [<code>av</code>](#module_av)
+**See**: [av1-spec](https://aomediacodec.github.io/av1-spec/#profiles)
+<a name="module_av.AV_LEVELS"></a>
 
-### vp~VP_LEVELS : <code>Array.&lt;number&gt;</code>
+### av.AV_LEVELS : <code>Array.&lt;string&gt;</code>
 
-VP Levels
+AV Levels
 
-**Kind**: inner constant of [<code>vp</code>](#module_vp)
-**See**: [webmproject.org](https://www.webmproject.org/vp9/mp4/)
-<a name="module_vp..VP_BIT_DEPTH"></a>
+**Kind**: static constant of [<code>av</code>](#module_av)
+**See**: [av1-spec](https://aomediacodec.github.io/av1-spec/#levels)
+<a name="module_av.AV_TIER"></a>
 
-### vp~VP_BIT_DEPTH : <code>Array.&lt;number&gt;</code>
-
-List of supported bit depth
-
-**Kind**: inner constant of [<code>vp</code>](#module_vp)
-<a name="module_vp..getAllItems"></a>
-
-### vp~getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
-
-Return a list of all possible codec parameter string and their human readable names
-
-**Kind**: inner method of [<code>vp</code>](#module_vp)
-<a name="module_vp..getCodec"></a>
-
-### vp~getCodec(options) ⇒ <code>string</code>
-
-Get a codec parameter string
-
-**Kind**: inner method of [<code>vp</code>](#module_vp)
-
-| Param   | Type                                           |
-| ------- | ---------------------------------------------- |
-| options | [<code>VPCodecOptions</code>](#VPCodecOptions) |
-
-<a name="module_vp..getCodecName"></a>
-
-### vp~getCodecName(codec) ⇒ <code>string</code>
-
-Get a codec human readbable name
-
-**Kind**: inner method of [<code>vp</code>](#module_vp)
-
-| Param | Type                | Description                                      |
-| ----- | ------------------- | ------------------------------------------------ |
-| codec | <code>string</code> | a codec string (avc1[.PPCCLL] eg. "avc1.640028") |
-
-<a name="module_hevc"></a>
-
-## hevc
-
-- [hevc](#module_hevc)
-  - [~See](#module_hevc..See) : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
-  - [~HEVC_PROFILE_COMPATIBILITY](#module_hevc..HEVC_PROFILE_COMPATIBILITY) : <code>Array.&lt;number&gt;</code>
-  - [~HEVC_LEVELS](#module_hevc..HEVC_LEVELS) : <code>Array.&lt;number&gt;</code>
-  - [~HEVC_TIER](#module_hevc..HEVC_TIER) : <code>Array.&lt;number&gt;</code>
-  - [~getAllItems()](#module_hevc..getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
-  - [~getCodec(options)](#module_hevc..getCodec) ⇒ <code>string</code>
-  - [~getCodecName(codec)](#module_hevc..getCodecName) ⇒ <code>string</code>
-
-<a name="module_hevc..See"></a>
-
-### hevc~See : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
-
-List of profiles with their profile numbers (PP) and the compatibility (C).
-
-**Kind**: inner constant of [<code>hevc</code>](#module_hevc)
-<a name="module_hevc..HEVC_PROFILE_COMPATIBILITY"></a>
-
-### hevc~HEVC_PROFILE_COMPATIBILITY : <code>Array.&lt;number&gt;</code>
-
-HEVC Profile Compatibility as a number in the 0..32 range
-TODO: is that correct
-
-**Kind**: inner constant of [<code>hevc</code>](#module_hevc)
-<a name="module_hevc..HEVC_LEVELS"></a>
-
-### hevc~HEVC_LEVELS : <code>Array.&lt;number&gt;</code>
-
-HEVC Levels
-
-**Kind**: inner constant of [<code>hevc</code>](#module_hevc)
-**See**: [hevc-levels](https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Tiers_and_levels)
-<a name="module_hevc..HEVC_TIER"></a>
-
-### hevc~HEVC_TIER : <code>Array.&lt;number&gt;</code>
+### av.AV_TIER : <code>Array.&lt;string&gt;</code>
 
 List of supported tier
 
-**Kind**: inner constant of [<code>hevc</code>](#module_hevc)
-<a name="module_hevc..getAllItems"></a>
+**Kind**: static constant of [<code>av</code>](#module_av)
+<a name="module_av.AV_BIT_DEPTH"></a>
 
-### hevc~getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+### av.AV_BIT_DEPTH : <code>Array.&lt;number&gt;</code>
+
+List of supported bit depth
+
+**Kind**: static constant of [<code>av</code>](#module_av)
+<a name="module_av.getAllItems"></a>
+
+### av.getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
 
 Return a list of all possible codec parameter string and their human readable names
 
-**Kind**: inner method of [<code>hevc</code>](#module_hevc)
-<a name="module_hevc..getCodec"></a>
+**Kind**: static method of [<code>av</code>](#module_av)
+<a name="module_av.getCodec"></a>
 
-### hevc~getCodec(options) ⇒ <code>string</code>
+### av.getCodec(options) ⇒ <code>string</code>
 
 Get a codec parameter string
 
-**Kind**: inner method of [<code>hevc</code>](#module_hevc)
+**Kind**: static method of [<code>av</code>](#module_av)
 
-| Param   | Type                                               |
-| ------- | -------------------------------------------------- |
-| options | [<code>HEVCCodecOptions</code>](#HEVCCodecOptions) |
+| Param   | Type                                           |
+| ------- | ---------------------------------------------- |
+| options | [<code>AVCodecOptions</code>](#AVCodecOptions) |
 
-<a name="module_hevc..getCodecName"></a>
+<a name="module_av.getCodecName"></a>
 
-### hevc~getCodecName(codec) ⇒ <code>string</code>
+### av.getCodecName(codec) ⇒ <code>string</code>
 
 Get a codec human readbable name
 
-**Kind**: inner method of [<code>hevc</code>](#module_hevc)
+**Kind**: static method of [<code>av</code>](#module_av)
 
-| Param | Type                | Description                                             |
-| ----- | ------------------- | ------------------------------------------------------- |
-| codec | <code>string</code> | a codec string (cccc.PP.C.TLL.CC eg. "hev1.1.3.H34.B0") |
+| Param | Type                | Description                                        |
+| ----- | ------------------- | -------------------------------------------------- |
+| codec | <code>string</code> | a codec string (av01.P.LLT.DD eg. "av01.P.LLT.DD") |
 
 <a name="module_avc"></a>
 
 ## avc
 
 - [avc](#module_avc)
-  - [~AVC_PROFILES](#module_avc..AVC_PROFILES) : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
-  - [~AVC_LEVELS](#module_avc..AVC_LEVELS) : <code>Array.&lt;number&gt;</code>
-  - [~getAllItems()](#module_avc..getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
-  - [~getCodec(options)](#module_avc..getCodec) ⇒ <code>string</code>
-  - [~getCodecName(codec)](#module_avc..getCodecName) ⇒ <code>string</code>
+  - [.AVC_PROFILES](#module_avc.AVC_PROFILES) : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
+  - [.AVC_LEVELS](#module_avc.AVC_LEVELS) : <code>Array.&lt;number&gt;</code>
+  - [.getAllItems()](#module_avc.getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+  - [.getCodec(options)](#module_avc.getCodec) ⇒ <code>string</code>
+  - [.getCodecName(codec)](#module_avc.getCodecName) ⇒ <code>string</code>
 
-<a name="module_avc..AVC_PROFILES"></a>
+<a name="module_avc.AVC_PROFILES"></a>
 
-### avc~AVC_PROFILES : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
+### avc.AVC_PROFILES : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
 
 List of profiles with their profile numbers (PP) and the constraints component (CC).
 
-**Kind**: inner constant of [<code>avc</code>](#module_avc)
-<a name="module_avc..AVC_LEVELS"></a>
+**Kind**: static constant of [<code>avc</code>](#module_avc)
+<a name="module_avc.AVC_LEVELS"></a>
 
-### avc~AVC_LEVELS : <code>Array.&lt;number&gt;</code>
+### avc.AVC_LEVELS : <code>Array.&lt;number&gt;</code>
 
 AVC Levels
 
-**Kind**: inner constant of [<code>avc</code>](#module_avc)
+**Kind**: static constant of [<code>avc</code>](#module_avc)
 **See**: [wikipedia.org](https://en.wikipedia.org/wiki/Advanced_Video_Coding#Levels)
-<a name="module_avc..getAllItems"></a>
+<a name="module_avc.getAllItems"></a>
 
-### avc~getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+### avc.getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
 
 Return a list of all possible codec parameter string and their human readable names
 
-**Kind**: inner method of [<code>avc</code>](#module_avc)
-<a name="module_avc..getCodec"></a>
+**Kind**: static method of [<code>avc</code>](#module_avc)
+<a name="module_avc.getCodec"></a>
 
-### avc~getCodec(options) ⇒ <code>string</code>
+### avc.getCodec(options) ⇒ <code>string</code>
 
 Get a codec parameter string
 
-**Kind**: inner method of [<code>avc</code>](#module_avc)
+**Kind**: static method of [<code>avc</code>](#module_avc)
 
 | Param   | Type                                             |
 | ------- | ------------------------------------------------ |
 | options | [<code>AVCCodecOptions</code>](#AVCCodecOptions) |
 
-<a name="module_avc..getCodecName"></a>
+<a name="module_avc.getCodecName"></a>
 
-### avc~getCodecName(codec) ⇒ <code>string</code>
+### avc.getCodecName(codec) ⇒ <code>string</code>
 
 Get a codec human readbable name
 
-**Kind**: inner method of [<code>avc</code>](#module_avc)
+**Kind**: static method of [<code>avc</code>](#module_avc)
 
 | Param | Type                | Description                                        |
 | ----- | ------------------- | -------------------------------------------------- |
 | codec | <code>string</code> | a codec string (cccc.PP.LL.DD eg. "vp09.00.10.08") |
 
-<a name="module_av"></a>
+<a name="module_hevc"></a>
 
-## av
+## hevc
 
-- [av](#module_av)
-  - [~AV_CODECS](#module_av..AV_CODECS) : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
-  - [~AV_PROFILES](#module_av..AV_PROFILES) : <code>Array.&lt;number&gt;</code>
-  - [~AV_LEVELS](#module_av..AV_LEVELS) : <code>Array.&lt;number&gt;</code>
-  - [~AV_TIER](#module_av..AV_TIER) : <code>Array.&lt;number&gt;</code>
-  - [~AV_BIT_DEPTH](#module_av..AV_BIT_DEPTH) : <code>Array.&lt;number&gt;</code>
-  - [~getAllItems()](#module_av..getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
-  - [~getCodec(options)](#module_av..getCodec) ⇒ <code>string</code>
-  - [~getCodecName(codec)](#module_av..getCodecName) ⇒ <code>string</code>
+- [hevc](#module_hevc)
+  - [.HEVC_PROFILES](#module_hevc.HEVC_PROFILES) : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
+  - [.HEVC_PROFILE_COMPATIBILITY](#module_hevc.HEVC_PROFILE_COMPATIBILITY) : <code>Array.&lt;number&gt;</code>
+  - [.HEVC_LEVELS](#module_hevc.HEVC_LEVELS) : <code>Array.&lt;string&gt;</code>
+  - [.HEVC_TIER](#module_hevc.HEVC_TIER) : <code>Array.&lt;string&gt;</code>
+  - [.getAllItems()](#module_hevc.getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+  - [.getCodec(options)](#module_hevc.getCodec) ⇒ <code>string</code>
+  - [.getCodecName(codec)](#module_hevc.getCodecName) ⇒ <code>string</code>
 
-<a name="module_av..AV_CODECS"></a>
+<a name="module_hevc.HEVC_PROFILES"></a>
 
-### av~AV_CODECS : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
+### hevc.HEVC_PROFILES : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
 
-List of codecs
+List of profiles with their profile numbers (PP) and the compatibility (C).
 
-**Kind**: inner constant of [<code>av</code>](#module_av)
-<a name="module_av..AV_PROFILES"></a>
+See Annexe 3 Profiles
 
-### av~AV_PROFILES : <code>Array.&lt;number&gt;</code>
+**Kind**: static constant of [<code>hevc</code>](#module_hevc)
+<a name="module_hevc.HEVC_PROFILE_COMPATIBILITY"></a>
 
-List of AV profiles numbers
+### hevc.HEVC_PROFILE_COMPATIBILITY : <code>Array.&lt;number&gt;</code>
 
-**Kind**: inner constant of [<code>av</code>](#module_av)
-**See**: [av1-spec](https://aomediacodec.github.io/av1-spec/#profiles)
-<a name="module_av..AV_LEVELS"></a>
+HEVC Profile Compatibility as a number in the 0..32 range
+TODO: is that correct
 
-### av~AV_LEVELS : <code>Array.&lt;number&gt;</code>
+**Kind**: static constant of [<code>hevc</code>](#module_hevc)
+<a name="module_hevc.HEVC_LEVELS"></a>
 
-AV Levels
+### hevc.HEVC_LEVELS : <code>Array.&lt;string&gt;</code>
 
-**Kind**: inner constant of [<code>av</code>](#module_av)
-**See**: [av1-spec](https://aomediacodec.github.io/av1-spec/#levels)
-<a name="module_av..AV_TIER"></a>
+HEVC Levels
 
-### av~AV_TIER : <code>Array.&lt;number&gt;</code>
+**Kind**: static constant of [<code>hevc</code>](#module_hevc)
+**See**: [hevc-levels](https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Tiers_and_levels)
+<a name="module_hevc.HEVC_TIER"></a>
+
+### hevc.HEVC_TIER : <code>Array.&lt;string&gt;</code>
 
 List of supported tier
 
-**Kind**: inner constant of [<code>av</code>](#module_av)
-<a name="module_av..AV_BIT_DEPTH"></a>
+**Kind**: static constant of [<code>hevc</code>](#module_hevc)
+<a name="module_hevc.getAllItems"></a>
 
-### av~AV_BIT_DEPTH : <code>Array.&lt;number&gt;</code>
-
-List of supported bit depth
-
-**Kind**: inner constant of [<code>av</code>](#module_av)
-<a name="module_av..getAllItems"></a>
-
-### av~getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+### hevc.getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
 
 Return a list of all possible codec parameter string and their human readable names
 
-**Kind**: inner method of [<code>av</code>](#module_av)
-<a name="module_av..getCodec"></a>
+**Kind**: static method of [<code>hevc</code>](#module_hevc)
+<a name="module_hevc.getCodec"></a>
 
-### av~getCodec(options) ⇒ <code>string</code>
+### hevc.getCodec(options) ⇒ <code>string</code>
 
 Get a codec parameter string
 
-**Kind**: inner method of [<code>av</code>](#module_av)
+**Kind**: static method of [<code>hevc</code>](#module_hevc)
 
-| Param   | Type                                           |
-| ------- | ---------------------------------------------- |
-| options | [<code>AVCodecOptions</code>](#AVCodecOptions) |
+| Param   | Type                                               |
+| ------- | -------------------------------------------------- |
+| options | [<code>HEVCCodecOptions</code>](#HEVCCodecOptions) |
 
-<a name="module_av..getCodecName"></a>
+<a name="module_hevc.getCodecName"></a>
 
-### av~getCodecName(codec) ⇒ <code>string</code>
+### hevc.getCodecName(codec) ⇒ <code>string</code>
 
 Get a codec human readbable name
 
-**Kind**: inner method of [<code>av</code>](#module_av)
+**Kind**: static method of [<code>hevc</code>](#module_hevc)
 
-| Param | Type                | Description                                        |
-| ----- | ------------------- | -------------------------------------------------- |
-| codec | <code>string</code> | a codec string (av01.P.LLT.DD eg. "av01.P.LLT.DD") |
+| Param | Type                | Description                                             |
+| ----- | ------------------- | ------------------------------------------------------- |
+| codec | <code>string</code> | a codec string (cccc.PP.C.TLL.CC eg. "hev1.1.3.H34.B0") |
+
+<a name="module_vp"></a>
+
+## vp
+
+- [vp](#module_vp)
+  - [.VP_CODECS](#module_vp.VP_CODECS) : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
+  - [.VP_PROFILES](#module_vp.VP_PROFILES) : <code>Array.&lt;number&gt;</code>
+  - [.VP_LEVELS](#module_vp.VP_LEVELS) : <code>Array.&lt;string&gt;</code>
+  - [.VP_BIT_DEPTH](#module_vp.VP_BIT_DEPTH) : <code>Array.&lt;number&gt;</code>
+  - [.getAllItems()](#module_vp.getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+  - [.getCodec(options)](#module_vp.getCodec) ⇒ <code>string</code>
+  - [.getCodecName(codec)](#module_vp.getCodecName) ⇒ <code>string</code>
+
+<a name="module_vp.VP_CODECS"></a>
+
+### vp.VP_CODECS : [<code>Array.&lt;CodecItem&gt;</code>](#CodecItem)
+
+List of codecs
+
+**Kind**: static constant of [<code>vp</code>](#module_vp)
+<a name="module_vp.VP_PROFILES"></a>
+
+### vp.VP_PROFILES : <code>Array.&lt;number&gt;</code>
+
+List of VP profiles numbers
+
+**Kind**: static constant of [<code>vp</code>](#module_vp)
+<a name="module_vp.VP_LEVELS"></a>
+
+### vp.VP_LEVELS : <code>Array.&lt;string&gt;</code>
+
+VP Levels
+
+**Kind**: static constant of [<code>vp</code>](#module_vp)
+**See**: [webmproject.org](https://www.webmproject.org/vp9/mp4/)
+<a name="module_vp.VP_BIT_DEPTH"></a>
+
+### vp.VP_BIT_DEPTH : <code>Array.&lt;number&gt;</code>
+
+List of supported bit depth
+
+**Kind**: static constant of [<code>vp</code>](#module_vp)
+<a name="module_vp.getAllItems"></a>
+
+### vp.getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+
+Return a list of all possible codec parameter string and their human readable names
+
+**Kind**: static method of [<code>vp</code>](#module_vp)
+<a name="module_vp.getCodec"></a>
+
+### vp.getCodec(options) ⇒ <code>string</code>
+
+Get a codec parameter string
+
+**Kind**: static method of [<code>vp</code>](#module_vp)
+
+| Param   | Type                                           |
+| ------- | ---------------------------------------------- |
+| options | [<code>VPCodecOptions</code>](#VPCodecOptions) |
+
+<a name="module_vp.getCodecName"></a>
+
+### vp.getCodecName(codec) ⇒ <code>string</code>
+
+Get a codec human readbable name
+
+**Kind**: static method of [<code>vp</code>](#module_vp)
+
+| Param | Type                | Description                                      |
+| ----- | ------------------- | ------------------------------------------------ |
+| codec | <code>string</code> | a codec string (avc1[.PPCCLL] eg. "avc1.640028") |
+
+<a name="AVProfileItem"></a>
+
+## AVProfileItem : <code>object</code>
+
+**Kind**: global typedef
+**Properties**
+
+| Name | Type                | Description                   |
+| ---- | ------------------- | ----------------------------- |
+| name | <code>string</code> |                               |
+| PP   | <code>string</code> | profile numbers (seq_profile) |
 
 <a name="VCProfileItem"></a>
 
-## VCProfileItem : <code>Object</code>
+## VCProfileItem : <code>object</code>
 
 **Kind**: global typedef
 **Properties**
@@ -388,7 +430,7 @@ Get a codec human readbable name
 
 <a name="CodecItem"></a>
 
-## CodecItem : <code>Object</code>
+## CodecItem : <code>object</code>
 
 **Kind**: global typedef
 **Properties**
@@ -400,7 +442,7 @@ Get a codec human readbable name
 
 <a name="MediaCodecItem"></a>
 
-## MediaCodecItem : <code>Object</code>
+## MediaCodecItem : <code>object</code>
 
 **Kind**: global typedef
 **Properties**
@@ -412,7 +454,7 @@ Get a codec human readbable name
 
 <a name="VPCodecOptions"></a>
 
-## VPCodecOptions : <code>Object</code>
+## VPCodecOptions : <code>object</code>
 
 **Kind**: global typedef
 **Properties**
@@ -426,7 +468,7 @@ Get a codec human readbable name
 
 <a name="AVCodecOptions"></a>
 
-## AVCodecOptions : <code>Object</code>
+## AVCodecOptions : <code>object</code>
 
 **Kind**: global typedef
 **Properties**
@@ -441,7 +483,7 @@ Get a codec human readbable name
 
 <a name="AVCCodecOptions"></a>
 
-## AVCCodecOptions : <code>Object</code>
+## AVCCodecOptions : <code>object</code>
 
 **Kind**: global typedef
 **Properties**
@@ -453,7 +495,7 @@ Get a codec human readbable name
 
 <a name="HEVCCodecOptions"></a>
 
-## HEVCCodecOptions : <code>Object</code>
+## HEVCCodecOptions : <code>object</code>
 
 **Kind**: global typedef
 **Properties**

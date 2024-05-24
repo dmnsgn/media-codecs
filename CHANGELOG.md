@@ -1,6 +1,15 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [2.0.1](https://github.com/dmnsgn/media-codecs/compare/v2.0.0...v2.0.1) (2024-05-24)
+
+
+### Bug Fixes
+
+* update types ([40adc3b](https://github.com/dmnsgn/media-codecs/commit/40adc3b5e9d5040b1b8ae0d3be5a8116a159cd55))
+
+
 
 # [2.0.0](https://github.com/dmnsgn/media-codecs/compare/v1.0.1...v2.0.0) (2023-04-19)
 
