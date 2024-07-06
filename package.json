@@ -1,6 +1,6 @@
 {
   "name": "media-codecs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Get a codec parameter string (like 'avc1.4d002a') from human readable options (like { name: 'Main', level: '4.2' }) and back to a descriptive name ('AVC Main Profile Level 4.2').",
   "keywords": [
     "codecs",
@@ -12,7 +12,10 @@
   ],
   "homepage": "https://github.com/dmnsgn/media-codecs",
   "bugs": "https://github.com/dmnsgn/media-codecs/issues",
-  "repository": "dmnsgn/media-codecs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmnsgn/media-codecs.git"
+  },
   "funding": [
     {
       "type": "individual",
