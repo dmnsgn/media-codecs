@@ -75,12 +75,10 @@
         </tbody>
       </table>
     </main>
-    <script async src="web_modules/es-module-shims.js" type="module"></script>
-    <script src="web_modules/import-map.json" type="importmap-shim"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 
-    <script type="module-shim">
+    <script type="module">
       import * as MediaCodecs from "./index.js";
-      import List from "list.js";
 
       const mainElement = document.querySelector("main");
       const navListElement = document.querySelector("nav ul");
