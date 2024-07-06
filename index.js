@@ -24,3 +24,5 @@ export * as AVC from "./src/avc.js";
  * @static
  */
 export * as HEVC from "./src/hevc.js";
+
+export * from "./types.js";
