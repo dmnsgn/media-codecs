@@ -115,12 +115,25 @@
             }
           }
 
+          let videoDecoderSupport;
+          if ("VideoDecoder" in window) {
+            try {
+              ({ supported: videoDecoderSupport } =
+                await VideoDecoder.isConfigSupported({
+                  codec,
+                }));
+            } catch (error) {
+              console.debug(codec, error);
+            }
+          }
+
           checks.push([
             name,
             codec,
             videoElement.canPlayType(mimeType),
             MediaSource.isTypeSupported(mimeType),
             videoEncoderSupport,
+            videoDecoderSupport,
           ]);
         }
 
@@ -137,16 +150,20 @@
           <th>VideoEncoder.<br>isConfigSupported<br>(${
             checks.map((check) => !!check[4]).filter(Boolean).length
           })</th>
+          <th>VideoDecoder.<br>isConfigSupported<br>(${
+            checks.map((check) => !!check[5]).filter(Boolean).length
+          })</th>
         </tr>
         ${checks
           .map(
-            ([name, codec, canPlay, mediaSource, videoEncoder]) =>
+            ([name, codec, canPlay, mediaSource, videoEncoder, videoDecoder]) =>
               `<tr class="${container}">${[
                 ["name", name],
                 ["codec", codec],
                 ["canPlay", canPlay || "❌"],
                 ["mediaSource", mediaSource ? "✅" : "❌"],
                 ["videoEncoder", videoEncoder ? "✅" : "❌"],
+                ["videoDecoder", videoDecoder ? "✅" : "❌"],
               ]
                 .map(([c, d]) => `<td class=${c}>${d}</td>`)
                 .join("")}</tr>`
@@ -158,7 +175,7 @@
       tbodyElement.innerHTML = table;
 
       const list = new List(mainElement, {
-        valueNames: ["name", "codec", "canPlay", "mediaSource", "videoEncoder"],
+        valueNames: ["name", "codec", "canPlay", "mediaSource", "videoEncoder", 'videoDecoder'],
         page: 100000,
         fuzzySearch: { threshold: 0.3 },
       });
