@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -166,7 +166,7 @@
                 ["videoDecoder", videoDecoder ? "✅" : "❌"],
               ]
                 .map(([c, d]) => `<td class=${c}>${d}</td>`)
-                .join("")}</tr>`
+                .join("")}</tr>`,
           )
           .join("")}`;
       }
@@ -175,7 +175,14 @@
       tbodyElement.innerHTML = table;
 
       const list = new List(mainElement, {
-        valueNames: ["name", "codec", "canPlay", "mediaSource", "videoEncoder", 'videoDecoder'],
+        valueNames: [
+          "name",
+          "codec",
+          "canPlay",
+          "mediaSource",
+          "videoEncoder",
+          "videoDecoder",
+        ],
         page: 100000,
         fuzzySearch: { threshold: 0.3 },
       });
