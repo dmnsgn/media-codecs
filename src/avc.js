@@ -26,7 +26,7 @@ const AVC_PROFILES = [
   { name: "Scalable Constrained Baseline", PP: "53", CC: "04" },
   { name: "Scalable High", PP: "56", CC: "00" },
   { name: "Scalable Constrained High", PP: "56", CC: "04" },
-  { name: "Scalable High Intra", PP: "56", CC: "20" },
+  { name: "Scalable High Intra", PP: "56", CC: "10" },
 
   { name: "Stereo High", PP: "80", CC: "00" },
   { name: "Multiview High", PP: "76", CC: "00" },
