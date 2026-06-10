@@ -1,7 +1,7 @@
 /**
  * @typedef {object} AVProfileItem
  * @property {string} name
- * @property {string} PP profile numbers (seq_profile)
+ * @property {string} P profile numbers (seq_profile)
  */
 
 /**
