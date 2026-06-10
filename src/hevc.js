@@ -93,7 +93,7 @@ const getAllItems = () =>
           if (tier === "High" && convertLevel(level) < 120) return;
 
           return {
-            name: `HEVC ${profile.name} Profile Compability ${compatibility} Level ${level} Tier ${tier}`,
+            name: `HEVC ${profile.name} Profile Compatibility ${compatibility} Level ${level} Tier ${tier}`,
             codec: formatCodec(
               cccc,
               profile,
@@ -136,8 +136,8 @@ const getCodec = ({
     cccc,
     profile,
     formatCompatibility(compatibility),
-    formatLevel(level),
     formatTier(tier),
+    formatLevel(level),
     constraint,
   );
 };
