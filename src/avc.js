@@ -20,7 +20,7 @@ const AVC_PROFILES = [
   { name: "High 10 Intra", PP: "6e", CC: "10" },
   { name: "High 4:2:2 Intra", PP: "7a", CC: "10" },
   { name: "High 4:4:4 Intra", PP: "f4", CC: "10" },
-  { name: "CAVLC 4:4:4 Intra", PP: "44", CC: "00" },
+  { name: "CAVLC 4:4:4 Intra", PP: "2c", CC: "00" },
 
   { name: "Scalable Baseline", PP: "53", CC: "00" },
   { name: "Scalable Constrained Baseline", PP: "53", CC: "04" },
