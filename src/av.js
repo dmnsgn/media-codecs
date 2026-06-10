@@ -117,7 +117,7 @@ const getCodec = ({ name, profile: profileName, level, tier, bitDepth }) => {
   if (!codec) throw new Error(`Unknown AV Codec "${name}"`);
 
   const profile = AV_PROFILES.find((profile) => profile.name === profileName);
-  if (!AV_PROFILES) {
+  if (!profile) {
     throw new Error(`Unknown AV Profile "${profileName}"`);
   }
   if (!AV_LEVELS.includes(level)) {
