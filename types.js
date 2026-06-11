@@ -12,6 +12,14 @@
  */
 
 /**
+ * @typedef {object} HEVCProfileItem
+ * @property {string} name
+ * @property {string} PP profile numbers as decimal string
+ * @property {string} C profile compatibility flags as hex string (bit N set = conforms to HEVC profile N)
+ * @property {string[]} constraints default constraint bytes as hex strings (up to 6); trailing "00" bytes are omitted when formatted
+ */
+
+/**
  * @typedef {object} CodecItem
  * @property {string} name
  * @property {string} cccc the four-character ID for the codec
@@ -49,10 +57,9 @@
 /**
  * @typedef {object} HEVCCodecOptions
  * @property {string} profile HEVC profile name (eg. "Main 10")
- * @property {number} compatibility
  * @property {string} level
  * @property {string} tier "Main" or "High"
- * @property {string} constraint TODO
+ * @property {string[]} [constraints] up to 6 constraint bytes as hex strings; defaults to the profile's standard constraints
  */
 
 export {};
