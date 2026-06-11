@@ -19,6 +19,7 @@ See the [demo](https://dmnsgn.github.io/media-codecs) that checks current browse
 [![paypal](https://img.shields.io/badge/donate-paypal-informational?logo=paypal)](https://paypal.me/dmnsgn)
 [![coinbase](https://img.shields.io/badge/donate-coinbase-informational?logo=coinbase)](https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3)
 [![twitter](https://img.shields.io/twitter/follow/dmnsgn?style=social)](https://twitter.com/dmnsgn)
+[![bluesky](https://img.shields.io/badge/-blue?logo=bluesky&label=Follow%20%40dmnsgn.me&style=social)](https://bsky.app/profile/dmnsgn.me)
 
 ![](https://raw.githubusercontent.com/dmnsgn/media-codecs/main/screenshot.png)
 
@@ -42,8 +43,7 @@ console.log(MediaSource.isTypeSupported(mimeType));
 
 Roadmap:
 
-- [ ] HEVC compatibility and constraints
-- [ ] VP, HEVC and AV1 optional parameters
+- [ ] VP and AV1 optional parameters
 
 ## API
 
