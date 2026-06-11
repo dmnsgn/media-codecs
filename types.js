@@ -5,7 +5,7 @@
  */
 
 /**
- * @typedef {object} VCProfileItem
+ * @typedef {object} AVCProfileItem
  * @property {string} name
  * @property {string} PP profile numbers as hex string
  * @property {string} CC constraints component as hex string

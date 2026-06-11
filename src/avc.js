@@ -3,7 +3,7 @@
 /**
  * List of profiles with their profile numbers (PP) and the constraints component (CC).
  * @constant
- * @type {import("../types.js").VCProfileItem[]}
+ * @type {import("../types.js").AVCProfileItem[]}
  */
 const AVC_PROFILES = [
   { name: "Constrained Baseline", PP: "42", CC: "40" },
