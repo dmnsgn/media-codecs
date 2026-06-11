@@ -93,7 +93,7 @@
       const containers = Object.keys(MediaCodecs);
 
       for (const container of containers) {
-        const items = MediaCodecs[container].getAllItems();
+        const items = MediaCodecs[container].getAllItems(true);
 
         const checks = [];
 
