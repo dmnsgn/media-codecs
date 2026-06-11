@@ -71,6 +71,8 @@ Roadmap:
 <dd></dd>
 <dt><a href="#AVCProfileItem">AVCProfileItem</a> : <code>object</code></dt>
 <dd></dd>
+<dt><a href="#HEVCProfileItem">HEVCProfileItem</a> : <code>object</code></dt>
+<dd></dd>
 <dt><a href="#CodecItem">CodecItem</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#MediaCodecItem">MediaCodecItem</a> : <code>object</code></dt>
@@ -259,29 +261,82 @@ Get a codec human readbable name
 ## hevc
 
 - [hevc](#module_hevc)
-  - [.HEVC_PROFILES](#module_hevc.HEVC_PROFILES) : <code>Array.&lt;VCProfileItem&gt;</code>
-  - [.HEVC_PROFILE_COMPATIBILITY](#module_hevc.HEVC_PROFILE_COMPATIBILITY) : <code>Array.&lt;number&gt;</code>
+  - [.HEVC_PROFILES](#module_hevc.HEVC_PROFILES) : [<code>Array.&lt;HEVCProfileItem&gt;</code>](#HEVCProfileItem)
+  - [.HEVC_CONSTRAINTS](#module_hevc.HEVC_CONSTRAINTS) : <code>Array.&lt;Array.&lt;string&gt;&gt;</code>
+  - [.HEVC_REXT_CONSTRAINTS](#module_hevc.HEVC_REXT_CONSTRAINTS) : <code>Array.&lt;Array.&lt;string&gt;&gt;</code>
+  - [.HEVC_HT_CONSTRAINTS](#module_hevc.HEVC_HT_CONSTRAINTS) : <code>Array.&lt;Array.&lt;string&gt;&gt;</code>
   - [.HEVC_LEVELS](#module_hevc.HEVC_LEVELS) : <code>Array.&lt;string&gt;</code>
   - [.HEVC_TIER](#module_hevc.HEVC_TIER) : <code>Array.&lt;string&gt;</code>
-  - [.getAllItems()](#module_hevc.getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+  - [.formatConstraints(constraints)](#module_hevc.formatConstraints) ⇒ <code>string</code>
+  - [.getAllItems([defaultConstraints])](#module_hevc.getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
   - [.getCodec(options)](#module_hevc.getCodec) ⇒ <code>string</code>
   - [.getCodecName(codec)](#module_hevc.getCodecName) ⇒ <code>string</code>
 
 <a name="module_hevc.HEVC_PROFILES"></a>
 
-### hevc.HEVC_PROFILES : <code>Array.&lt;VCProfileItem&gt;</code>
+### hevc.HEVC_PROFILES : [<code>Array.&lt;HEVCProfileItem&gt;</code>](#HEVCProfileItem)
 
-List of profiles with their profile numbers (PP) and the compatibility (C).
+List of profiles with their profile numbers (PP), profile compatibility flags (C),
+and default constraint bytes.
 
-See Annexe 3 Profiles
+C is a hex string where bit N being set means the stream conforms to HEVC profile N.
+constraints holds up to 6 bytes encoding general source and profile-specific constraint flags;
+trailing zero bytes are omitted when formatted.
 
 **Kind**: static constant of [<code>hevc</code>](#module_hevc)
-<a name="module_hevc.HEVC_PROFILE_COMPATIBILITY"></a>
+**See**: [hevc-spec](https://www.itu.int/rec/T-REC-H.265/en)
+<a name="module_hevc.HEVC_CONSTRAINTS"></a>
 
-### hevc.HEVC_PROFILE_COMPATIBILITY : <code>Array.&lt;number&gt;</code>
+### hevc.HEVC_CONSTRAINTS : <code>Array.&lt;Array.&lt;string&gt;&gt;</code>
 
-HEVC Profile Compatibility as a number in the 0..32 range
-TODO: is that correct
+Constraint arrays for standard profiles (PP 1, 2, 3).
+
+Only byte 0 is used; its layout is:
+bit 7: general_progressive_source_flag
+bit 6: general_interlaced_source_flag
+bit 5: general_non_packed_constraint_flag
+bit 4: general_frame_only_constraint_flag
+bit 3: general_one_picture_only_constraint_flag
+bits 2–0: reserved zero
+32 entries covering all combinations of bits 7–3.
+
+**Kind**: static constant of [<code>hevc</code>](#module_hevc)
+<a name="module_hevc.HEVC_REXT_CONSTRAINTS"></a>
+
+### hevc.HEVC_REXT_CONSTRAINTS : <code>Array.&lt;Array.&lt;string&gt;&gt;</code>
+
+Constraint arrays for RExt non-HT profiles (PP 4, 6, 7, 8).
+
+Byte 0:
+bits 7–4: source flags (progressive, interlaced, non_packed, frame_only)
+bit 3: general_max_12bit_constraint_flag
+bit 2: general_max_10bit_constraint_flag (implies max_12bit)
+bit 1: general_max_8bit_constraint_flag (implies max_10bit)
+bit 0: general_max_422chroma_constraint_flag
+
+Byte 1 (omitted when all zero):
+bit 7: general_max_420chroma_constraint_flag (implies max_422chroma)
+bit 6: general_max_monochrome_constraint_flag (implies max_420chroma)
+bit 5: general_intra_constraint_flag
+bit 4: general_one_picture_only_constraint_flag
+bit 3: general_lower_bit_rate_constraint_flag
+bits 2–0: reserved zero
+
+Monotonic depth: max_8bit → max_10bit → max_12bit (4 valid combos).
+Monotonic chroma: max_monochrome → max_420chroma → max_422chroma (4 valid combos).
+2048 entries total (16 source × 4 depth × 4 chroma × 2 intra × 2 opo × 2 lbr).
+
+**Kind**: static constant of [<code>hevc</code>](#module_hevc)
+<a name="module_hevc.HEVC_HT_CONSTRAINTS"></a>
+
+### hevc.HEVC_HT_CONSTRAINTS : <code>Array.&lt;Array.&lt;string&gt;&gt;</code>
+
+Constraint arrays for HT profiles (PP 5, 9, 10, 11).
+
+Same byte layout as HEVC_REXT_CONSTRAINTS but byte 1 bit 2 carries
+general_max_14bit_constraint_flag, extending the depth hierarchy:
+max_8bit → max_10bit → max_12bit → max_14bit (5 valid depth combos).
+2560 entries total (16 source × 5 depth × 4 chroma × 2 intra × 2 opo × 2 lbr).
 
 **Kind**: static constant of [<code>hevc</code>](#module_hevc)
 <a name="module_hevc.HEVC_LEVELS"></a>
@@ -299,13 +354,31 @@ HEVC Levels
 List of supported tier
 
 **Kind**: static constant of [<code>hevc</code>](#module_hevc)
+<a name="module_hevc.formatConstraints"></a>
+
+### hevc.formatConstraints(constraints) ⇒ <code>string</code>
+
+Format up to 6 constraint bytes as a dot-separated lowercase hex string,
+omitting trailing zero bytes.
+
+**Kind**: static method of [<code>hevc</code>](#module_hevc)
+
+| Param       | Type                              |
+| ----------- | --------------------------------- |
+| constraints | <code>Array.&lt;string&gt;</code> |
+
 <a name="module_hevc.getAllItems"></a>
 
-### hevc.getAllItems() ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
+### hevc.getAllItems([defaultConstraints]) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
 
 Return a list of all possible codec parameter string and their human readable names
 
 **Kind**: static method of [<code>hevc</code>](#module_hevc)
+
+| Param                | Type                 | Default            | Description                                                           |
+| -------------------- | -------------------- | ------------------ | --------------------------------------------------------------------- |
+| [defaultConstraints] | <code>boolean</code> | <code>false</code> | when true, return only items using each profile's default constraints |
+
 <a name="module_hevc.getCodec"></a>
 
 ### hevc.getCodec(options) ⇒ <code>string</code>
@@ -322,13 +395,13 @@ Get a codec parameter string
 
 ### hevc.getCodecName(codec) ⇒ <code>string</code>
 
-Get a codec human readbable name
+Get a codec human readable name
 
 **Kind**: static method of [<code>hevc</code>](#module_hevc)
 
-| Param | Type                | Description                                             |
-| ----- | ------------------- | ------------------------------------------------------- |
-| codec | <code>string</code> | a codec string (cccc.PP.C.TLL.CC eg. "hev1.1.3.H34.B0") |
+| Param | Type                | Description                            |
+| ----- | ------------------- | -------------------------------------- |
+| codec | <code>string</code> | a codec string (eg. "hev1.1.6.L93.b0") |
 
 <a name="module_vp"></a>
 
@@ -428,6 +501,20 @@ Get a codec human readbable name
 | PP   | <code>string</code> | profile numbers as hex string       |
 | CC   | <code>string</code> | constraints component as hex string |
 
+<a name="HEVCProfileItem"></a>
+
+## HEVCProfileItem : <code>object</code>
+
+**Kind**: global typedef
+**Properties**
+
+| Name        | Type                              | Description                                                                                       |
+| ----------- | --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| name        | <code>string</code>               |                                                                                                   |
+| PP          | <code>string</code>               | profile numbers as decimal string                                                                 |
+| C           | <code>string</code>               | profile compatibility flags as hex string (bit N set = conforms to HEVC profile N)                |
+| constraints | <code>Array.&lt;string&gt;</code> | default constraint bytes as hex strings (up to 6); trailing "00" bytes are omitted when formatted |
+
 <a name="CodecItem"></a>
 
 ## CodecItem : <code>object</code>
@@ -500,13 +587,12 @@ Get a codec human readbable name
 **Kind**: global typedef
 **Properties**
 
-| Name          | Type                | Description                       |
-| ------------- | ------------------- | --------------------------------- |
-| profile       | <code>string</code> | HEVC profile name (eg. "Main 10") |
-| compatibility | <code>number</code> |                                   |
-| level         | <code>string</code> |                                   |
-| tier          | <code>string</code> | "Main" or "High"                  |
-| constraint    | <code>string</code> | TODO                              |
+| Name          | Type                              | Description                                                                             |
+| ------------- | --------------------------------- | --------------------------------------------------------------------------------------- |
+| profile       | <code>string</code>               | HEVC profile name (eg. "Main 10")                                                       |
+| level         | <code>string</code>               |                                                                                         |
+| tier          | <code>string</code>               | "Main" or "High"                                                                        |
+| [constraints] | <code>Array.&lt;string&gt;</code> | up to 6 constraint bytes as hex strings; defaults to the profile's standard constraints |
 
 <!-- api-end -->
 

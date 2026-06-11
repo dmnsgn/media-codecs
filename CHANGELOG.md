@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+# [3.0.0](https://github.com/dmnsgn/media-codecs/compare/v2.0.3...v3.0.0) (2026-06-11)
+
+
+### Features
+
+* handle constraints flags and fix compatibility for HEVC ([72dda44](https://github.com/dmnsgn/media-codecs/commit/72dda442ab355c16c053ff32e3ace3faad306620)), closes [#4](https://github.com/dmnsgn/media-codecs/issues/4) [#1](https://github.com/dmnsgn/media-codecs/issues/1)
+
+
+### BREAKING CHANGES
+
+* generated hevc codec string have different compatibility and default constraints
+
+
+
 ## [2.0.3](https://github.com/dmnsgn/media-codecs/compare/v2.0.2...v2.0.3) (2026-06-11)
 
 
