@@ -1,7 +1,7 @@
 import { describe, test } from "node:test";
 import assert from "node:assert";
 
-import { HEVC } from "../index.js";
+import { AV, AVC, HEVC, VP } from "../index.js";
 
 const {
   HEVC_PROFILES,
@@ -243,9 +243,9 @@ describe("HEVC_HT_CONSTRAINTS (HT profiles)", () => {
   });
 });
 
-// ─── getCodec ─────────────────────────────────────────────────────────────────
+// ─── HEVC getCodec ────────────────────────────────────────────────────────────
 
-describe("getCodec", () => {
+describe("HEVC getCodec", () => {
   test("Main profile defaults", () => {
     assert.strictEqual(
       getCodec({ profile: "Main", level: "3.1", tier: "Main" }),
@@ -355,9 +355,9 @@ describe("getCodec", () => {
   });
 });
 
-// ─── getCodecName ─────────────────────────────────────────────────────────────
+// ─── HEVC getCodecName ────────────────────────────────────────────────────────
 
-describe("getCodecName", () => {
+describe("HEVC getCodecName", () => {
   test("Main profile", () => {
     assert.strictEqual(
       getCodecName("hev1.1.6.L93.b0"),
@@ -387,9 +387,9 @@ describe("getCodecName", () => {
   });
 });
 
-// ─── getAllItems ───────────────────────────────────────────────────────────────
+// ─── HEVC getAllItems ──────────────────────────────────────────────────────────
 
-describe("getAllItems with defaultConstraints", () => {
+describe("HEVC getAllItems with defaultConstraints", () => {
   test("returns one item per profile/level/tier (11 profiles × 21 combos = 231)", () => {
     assert.strictEqual(getAllItems(true).length, 231);
   });
@@ -411,7 +411,7 @@ describe("getAllItems with defaultConstraints", () => {
   });
 });
 
-describe("getAllItems", () => {
+describe("HEVC getAllItems", () => {
   let items;
 
   test("runs without error", () => {
@@ -446,12 +446,10 @@ describe("getAllItems", () => {
   });
 
   test("High tier only appears for level 4.0 and above", () => {
-    const lowLevels = new Set(["1", "2", "2.1", "3", "3.1"]);
     for (const item of items) {
       const parts = item.codec.split(".");
       const tl = parts[3]; // e.g. "L93" or "H120"
       if (!tl.startsWith("H")) continue;
-      // find level from codec LL value
       const ll = parseInt(tl.slice(1), 10);
       assert.ok(
         ll >= 120,
@@ -493,7 +491,6 @@ describe("getAllItems", () => {
       if (parts.length < 6) return false;
       const b1 = parseInt(parts[5], 16);
       const b0 = parseInt(parts[4], 16);
-      // max_14bit set (bit2) but no max_12/10/8bit in byte0 (bits 3-1 = 0)
       return (b1 & 0x04) === 0x04 && (b0 & 0x0e) === 0;
     });
     assert.ok(
@@ -502,12 +499,11 @@ describe("getAllItems", () => {
     );
   });
 
-  test("standard profiles have no second constraint byte with non-zero depth/chroma", () => {
+  test("standard profiles have no non-zero bits in byte0 bits 2–0 (reserved)", () => {
     for (const item of items) {
       const parts = item.codec.split(".");
       const pp = parts[1];
       if (!["1", "2", "3"].includes(pp)) continue;
-      // byte0 bits 2-0 must be zero (reserved for standard profiles)
       const b0 = parseInt(parts[4], 16);
       assert.strictEqual(
         b0 & 0x07,
@@ -517,19 +513,425 @@ describe("getAllItems", () => {
     }
   });
 
-  test("Main Still Picture items always have one_picture_only bit set (byte0 bit3=1)", () => {
-    const mspItems = items.filter((i) => i.codec.split(".")[1] === "3");
-    assert.ok(mspItems.length > 0);
-    for (const item of mspItems) {
-      const b0 = parseInt(item.codec.split(".")[4], 16);
-      // For MSP profile (standard), bit3 = one_picture_only — but this is enumerated
-      // so some items will have it 0 and some 1. Just verify the default item exists.
-      // (MSP has 32 constraint combos; not all have opo set)
-    }
-    // Verify the default MSP codec string is in the list
+  test("default Main Still Picture codec string is present", () => {
     assert.ok(
-      mspItems.some((i) => i.codec === "hev1.3.c.L93.b8"),
+      items.some((i) => i.codec === "hev1.3.c.L93.b8"),
       "Default MSP codec string not found",
     );
+  });
+});
+
+// ─── AV ───────────────────────────────────────────────────────────────────────
+
+describe("AV getCodec", () => {
+  // Format: av01.{P}.{LL}{T}.{DD}
+  // LL = ((X-2)*4 + Y), decimal, padded to 2 digits
+  // T = first letter of tier ("M" or "H")
+  // DD = bitDepth, decimal, padded to 2 digits
+  test("Main profile level 2.0 Main tier 8-bit", () => {
+    assert.strictEqual(
+      AV.getCodec({
+        name: "AV1",
+        profile: "Main",
+        level: "2.0",
+        tier: "Main",
+        bitDepth: 8,
+      }),
+      "av01.0.00M.08",
+    );
+  });
+  test("Main profile level 4.0 High tier 10-bit", () => {
+    // LL = (4-2)*4+0 = 8 → "08"
+    assert.strictEqual(
+      AV.getCodec({
+        name: "AV1",
+        profile: "Main",
+        level: "4.0",
+        tier: "High",
+        bitDepth: 10,
+      }),
+      "av01.0.08H.10",
+    );
+  });
+  test("Professional profile level 6.3 High tier 12-bit", () => {
+    // LL = (6-2)*4+3 = 19 → "19"
+    assert.strictEqual(
+      AV.getCodec({
+        name: "AV1",
+        profile: "Professional",
+        level: "6.3",
+        tier: "High",
+        bitDepth: 12,
+      }),
+      "av01.2.19H.12",
+    );
+  });
+  test("High profile level 7.3 Main tier 10-bit (last level)", () => {
+    // LL = (7-2)*4+3 = 23 → "23"
+    assert.strictEqual(
+      AV.getCodec({
+        name: "AV1",
+        profile: "High",
+        level: "7.3",
+        tier: "Main",
+        bitDepth: 10,
+      }),
+      "av01.1.23M.10",
+    );
+  });
+  test("throws on unknown codec name", () => {
+    assert.throws(
+      () =>
+        AV.getCodec({
+          name: "AV3",
+          profile: "Main",
+          level: "2.0",
+          tier: "Main",
+          bitDepth: 8,
+        }),
+      /Unknown AV Codec/,
+    );
+  });
+  test("throws on unknown profile", () => {
+    assert.throws(
+      () =>
+        AV.getCodec({
+          name: "AV1",
+          profile: "Ultra",
+          level: "2.0",
+          tier: "Main",
+          bitDepth: 8,
+        }),
+      /Unknown AV Profile/,
+    );
+  });
+  test("throws on unknown level", () => {
+    assert.throws(
+      () =>
+        AV.getCodec({
+          name: "AV1",
+          profile: "Main",
+          level: "9.0",
+          tier: "Main",
+          bitDepth: 8,
+        }),
+      /Unknown AV Level/,
+    );
+  });
+  test("throws on unknown tier", () => {
+    assert.throws(
+      () =>
+        AV.getCodec({
+          name: "AV1",
+          profile: "Main",
+          level: "2.0",
+          tier: "Ultra",
+          bitDepth: 8,
+        }),
+      /Unknown AV Tier/,
+    );
+  });
+  test("throws on unknown bit depth", () => {
+    assert.throws(
+      () =>
+        AV.getCodec({
+          name: "AV1",
+          profile: "Main",
+          level: "2.0",
+          tier: "Main",
+          bitDepth: 16,
+        }),
+      /Unknown AV BitDepth/,
+    );
+  });
+});
+
+describe("AV getCodecName", () => {
+  test("roundtrip Main level 2.0", () => {
+    assert.strictEqual(
+      AV.getCodecName("av01.0.00M.08"),
+      "AV1 Main Profile Level 2.0 Tier Main BitDepth 8",
+    );
+  });
+  test("roundtrip Professional level 6.3 12-bit", () => {
+    assert.strictEqual(
+      AV.getCodecName("av01.2.19H.12"),
+      "AV1 Professional Profile Level 6.3 Tier High BitDepth 12",
+    );
+  });
+  test("returns undefined for unknown codec", () => {
+    assert.strictEqual(AV.getCodecName("av01.9.00M.08"), undefined);
+  });
+});
+
+describe("AV getAllItems", () => {
+  let items;
+
+  test("runs without error", () => {
+    items = AV.getAllItems();
+  });
+
+  test("correct total count", () => {
+    // Level-tier combos: 8 low levels (2.x–3.x) × Main only + 16 high levels (4.x–7.x) × 2 tiers = 40
+    // Main (P=0):         40 × 2 bitDepths (8, 10)      =  80
+    // High (P=1):         40 × 2 bitDepths               =  80
+    // Professional (P=2): 40 × 3 bitDepths (8, 10, 12)  = 120
+    // Total: 280
+    assert.strictEqual(items.length, 280);
+  });
+
+  test("all codec strings start with av01", () => {
+    for (const item of items) {
+      assert.ok(item.codec.startsWith("av01."), item.codec);
+    }
+  });
+
+  test("12-bit depth only appears for Professional profile (P=2)", () => {
+    for (const item of items) {
+      const [, P, , DD] = item.codec.split(".");
+      if (DD === "12")
+        assert.strictEqual(P, "2", `12-bit in non-Professional: ${item.codec}`);
+    }
+  });
+
+  test("High tier only appears for level 4.0 and above (LL >= 08)", () => {
+    for (const item of items) {
+      const llt = item.codec.split(".")[2]; // e.g. "00M" or "08H"
+      if (!llt.endsWith("H")) continue;
+      const ll = parseInt(llt, 10);
+      assert.ok(ll >= 8, `High tier at LL=${ll} in ${item.codec}`);
+    }
+  });
+
+  test("no duplicate codec strings", () => {
+    const codecs = items.map((i) => i.codec);
+    assert.strictEqual(new Set(codecs).size, codecs.length);
+  });
+});
+
+// ─── AVC ──────────────────────────────────────────────────────────────────────
+
+describe("AVC getCodec", () => {
+  // Format: avc1.{PP}{CC}{LL}
+  // LL = (level * 10).toString(16), padded to 2 hex digits
+  test("Main profile level 3.1", () => {
+    // 3.1 → 31 → 0x1f
+    assert.strictEqual(
+      AVC.getCodec({ profile: "Main", level: "3.1" }),
+      "avc1.4d001f",
+    );
+  });
+  test("Constrained Baseline level 3", () => {
+    // 3 → 30 → 0x1e; CC=40 (constraint_set0_flag)
+    assert.strictEqual(
+      AVC.getCodec({ profile: "Constrained Baseline", level: "3" }),
+      "avc1.42401e",
+    );
+  });
+  test("High profile level 4.1", () => {
+    // 4.1 → 41 → 0x29
+    assert.strictEqual(
+      AVC.getCodec({ profile: "High", level: "4.1" }),
+      "avc1.640029",
+    );
+  });
+  test("CAVLC 4:4:4 Intra level 1 (PP=2c, 44 decimal)", () => {
+    // PP=0x2c=44 decimal; level 1 → 10 → 0x0a
+    assert.strictEqual(
+      AVC.getCodec({ profile: "CAVLC 4:4:4 Intra", level: "1" }),
+      "avc1.2c000a",
+    );
+  });
+  test("Scalable High Intra (CC=10, constraint_set3_flag)", () => {
+    // 3.1 → 0x1f
+    assert.strictEqual(
+      AVC.getCodec({ profile: "Scalable High Intra", level: "3.1" }),
+      "avc1.56101f",
+    );
+  });
+  test("High 4:4:4 Intra (PP=f4, CC=10)", () => {
+    assert.strictEqual(
+      AVC.getCodec({ profile: "High 4:4:4 Intra", level: "4" }),
+      "avc1.f41028",
+    );
+  });
+  test("level encoding is hex, not decimal", () => {
+    // Level 5.1 → 51 decimal → 0x33 hex
+    assert.strictEqual(
+      AVC.getCodec({ profile: "High", level: "5.1" }),
+      "avc1.640033",
+    );
+  });
+  test("throws on unknown profile", () => {
+    assert.throws(
+      () => AVC.getCodec({ profile: "Unknown", level: "3.1" }),
+      /Unknown AVC Profile/,
+    );
+  });
+  test("throws on unknown level", () => {
+    assert.throws(
+      () => AVC.getCodec({ profile: "Main", level: "9.9" }),
+      /Unknown AVC Level/,
+    );
+  });
+});
+
+describe("AVC getCodecName", () => {
+  test("Main level 3.1", () => {
+    assert.strictEqual(
+      AVC.getCodecName("avc1.4d001f"),
+      "AVC Main Profile Level 3.1",
+    );
+  });
+  test("Constrained Baseline level 3", () => {
+    assert.strictEqual(
+      AVC.getCodecName("avc1.42401e"),
+      "AVC Constrained Baseline Profile Level 3",
+    );
+  });
+  test("returns undefined for unknown codec", () => {
+    assert.strictEqual(AVC.getCodecName("avc1.000000"), undefined);
+  });
+});
+
+describe("AVC getAllItems", () => {
+  let items;
+
+  test("runs without error", () => {
+    items = AVC.getAllItems();
+  });
+
+  test("correct total count", () => {
+    // 22 profiles × 19 levels = 418
+    assert.strictEqual(items.length, 418);
+  });
+
+  test("all codec strings start with avc1", () => {
+    for (const item of items) {
+      assert.ok(item.codec.startsWith("avc1."), item.codec);
+    }
+  });
+
+  test("no duplicate codec strings", () => {
+    const codecs = items.map((i) => i.codec);
+    assert.strictEqual(new Set(codecs).size, codecs.length);
+  });
+
+  test("level component is hex (level 5.1 = 0x33, not 51)", () => {
+    const item = items.find((i) => i.name === "AVC High Profile Level 5.1");
+    assert.ok(item, "AVC High Profile Level 5.1 not found");
+    assert.ok(item.codec.endsWith("33"), `expected hex 33, got ${item.codec}`);
+  });
+});
+
+// ─── VP ───────────────────────────────────────────────────────────────────────
+
+describe("VP getCodec", () => {
+  // Format: {cccc}.{PP}.{LL}.{DD}
+  // LL = (level * 10).toString(), decimal, padded to 2 digits
+  test("VP9 profile 0 level 4.1 8-bit", () => {
+    assert.strictEqual(
+      VP.getCodec({ name: "VP9", profile: 0, level: "4.1", bitDepth: 8 }),
+      "vp09.00.41.08",
+    );
+  });
+  test("VP8 profile 2 level 2 10-bit", () => {
+    // VP_LEVELS uses "2" not "2.0"; 2*10 = 20 → "20"
+    assert.strictEqual(
+      VP.getCodec({ name: "VP8", profile: 2, level: "2", bitDepth: 10 }),
+      "vp08.02.20.10",
+    );
+  });
+  test("VP9 profile 3 level 6.2 12-bit", () => {
+    // LL = 6.2*10 = 62 → "62"
+    assert.strictEqual(
+      VP.getCodec({ name: "VP9", profile: 3, level: "6.2", bitDepth: 12 }),
+      "vp09.03.62.12",
+    );
+  });
+  test("level component is decimal, not hex (level 5.1 = 51, not 0x33)", () => {
+    assert.strictEqual(
+      VP.getCodec({ name: "VP9", profile: 0, level: "5.1", bitDepth: 8 }),
+      "vp09.00.51.08",
+    );
+  });
+  test("throws on unknown codec name", () => {
+    assert.throws(
+      () =>
+        VP.getCodec({ name: "VP10", profile: 0, level: "4.1", bitDepth: 8 }),
+      /Unknown VP Codec/,
+    );
+  });
+  test("throws on unknown profile", () => {
+    assert.throws(
+      () => VP.getCodec({ name: "VP9", profile: 4, level: "4.1", bitDepth: 8 }),
+      /Unknown VP Profile/,
+    );
+  });
+  test("throws on unknown level", () => {
+    assert.throws(
+      () => VP.getCodec({ name: "VP9", profile: 0, level: "9.0", bitDepth: 8 }),
+      /Unknown VP Level/,
+    );
+  });
+  test("throws on unknown bit depth", () => {
+    assert.throws(
+      () =>
+        VP.getCodec({ name: "VP9", profile: 0, level: "4.1", bitDepth: 16 }),
+      /Unknown VP BitDepth/,
+    );
+  });
+});
+
+describe("VP getCodecName", () => {
+  test("VP9 profile 0 level 4.1 8-bit", () => {
+    assert.strictEqual(
+      VP.getCodecName("vp09.00.41.08"),
+      "VP9 Profile 0 Level 4.1 BitDepth 8",
+    );
+  });
+  test("VP8 profile 1 level 3.1 10-bit", () => {
+    assert.strictEqual(
+      VP.getCodecName("vp08.01.31.10"),
+      "VP8 Profile 1 Level 3.1 BitDepth 10",
+    );
+  });
+  test("returns undefined for unknown codec", () => {
+    assert.strictEqual(VP.getCodecName("vp09.99.00.08"), undefined);
+  });
+});
+
+describe("VP getAllItems", () => {
+  let items;
+
+  test("runs without error", () => {
+    items = VP.getAllItems();
+  });
+
+  test("correct total count", () => {
+    // 2 codecs × 4 profiles × 14 levels × 3 bit depths = 336
+    assert.strictEqual(items.length, 336);
+  });
+
+  test("codec strings for VP8 start with vp08 and VP9 with vp09", () => {
+    for (const item of items) {
+      assert.ok(
+        item.codec.startsWith("vp08.") || item.codec.startsWith("vp09."),
+        item.codec,
+      );
+    }
+  });
+
+  test("level component is decimal (level 5.1 → 51, not 0x33)", () => {
+    const item = items.find(
+      (i) => i.name === "VP9 Profile 0 Level 5.1 BitDepth 8",
+    );
+    assert.ok(item, "VP9 Profile 0 Level 5.1 BitDepth 8 not found");
+    assert.strictEqual(item.codec, "vp09.00.51.08");
+  });
+
+  test("no duplicate codec strings", () => {
+    const codecs = items.map((i) => i.codec);
+    assert.strictEqual(new Set(codecs).size, codecs.length);
   });
 });

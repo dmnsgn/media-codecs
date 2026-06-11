@@ -38,9 +38,13 @@
   },
   "main": "index.js",
   "types": "types/index.d.ts",
+  "scripts": {
+    "test": "node --experimental-test-coverage test",
+    "test:watch": "node --watch --experimental-test-coverage test"
+  },
   "engines": {
     "node": ">=22.0.0",
     "npm": ">=10.5.1",
-    "snowdev": ">=2.3.x"
+    "snowdev": ">=2.7.x"
   }
 }
