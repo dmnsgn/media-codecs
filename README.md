@@ -69,7 +69,7 @@ Roadmap:
 <dl>
 <dt><a href="#AVProfileItem">AVProfileItem</a> : <code>object</code></dt>
 <dd></dd>
-<dt><a href="#VCProfileItem">VCProfileItem</a> : <code>object</code></dt>
+<dt><a href="#AVCProfileItem">AVCProfileItem</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#CodecItem">CodecItem</a> : <code>object</code></dt>
 <dd></dd>
@@ -202,7 +202,7 @@ Get a codec human readbable name
 ## avc
 
 - [avc](#module_avc)
-  - [.AVC_PROFILES](#module_avc.AVC_PROFILES) : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
+  - [.AVC_PROFILES](#module_avc.AVC_PROFILES) : [<code>Array.&lt;AVCProfileItem&gt;</code>](#AVCProfileItem)
   - [.AVC_LEVELS](#module_avc.AVC_LEVELS) : <code>Array.&lt;number&gt;</code>
   - [.getAllItems()](#module_avc.getAllItems) ⇒ [<code>Array.&lt;MediaCodecItem&gt;</code>](#MediaCodecItem)
   - [.getCodec(options)](#module_avc.getCodec) ⇒ <code>string</code>
@@ -210,7 +210,7 @@ Get a codec human readbable name
 
 <a name="module_avc.AVC_PROFILES"></a>
 
-### avc.AVC_PROFILES : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
+### avc.AVC_PROFILES : [<code>Array.&lt;AVCProfileItem&gt;</code>](#AVCProfileItem)
 
 List of profiles with their profile numbers (PP) and the constraints component (CC).
 
@@ -259,7 +259,7 @@ Get a codec human readbable name
 ## hevc
 
 - [hevc](#module_hevc)
-  - [.HEVC_PROFILES](#module_hevc.HEVC_PROFILES) : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
+  - [.HEVC_PROFILES](#module_hevc.HEVC_PROFILES) : <code>Array.&lt;VCProfileItem&gt;</code>
   - [.HEVC_PROFILE_COMPATIBILITY](#module_hevc.HEVC_PROFILE_COMPATIBILITY) : <code>Array.&lt;number&gt;</code>
   - [.HEVC_LEVELS](#module_hevc.HEVC_LEVELS) : <code>Array.&lt;string&gt;</code>
   - [.HEVC_TIER](#module_hevc.HEVC_TIER) : <code>Array.&lt;string&gt;</code>
@@ -269,7 +269,7 @@ Get a codec human readbable name
 
 <a name="module_hevc.HEVC_PROFILES"></a>
 
-### hevc.HEVC_PROFILES : [<code>Array.&lt;VCProfileItem&gt;</code>](#VCProfileItem)
+### hevc.HEVC_PROFILES : <code>Array.&lt;VCProfileItem&gt;</code>
 
 List of profiles with their profile numbers (PP) and the compatibility (C).
 
@@ -413,11 +413,11 @@ Get a codec human readbable name
 | Name | Type                | Description                   |
 | ---- | ------------------- | ----------------------------- |
 | name | <code>string</code> |                               |
-| PP   | <code>string</code> | profile numbers (seq_profile) |
+| P    | <code>string</code> | profile numbers (seq_profile) |
 
-<a name="VCProfileItem"></a>
+<a name="AVCProfileItem"></a>
 
-## VCProfileItem : <code>object</code>
+## AVCProfileItem : <code>object</code>
 
 **Kind**: global typedef
 **Properties**
